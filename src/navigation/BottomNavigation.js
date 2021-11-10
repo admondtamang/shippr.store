@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import Offers from "../screens/Offers";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,10 +35,10 @@ const BottomNavigation = () => {
                 }}
             />
             <Tab.Screen
-                name="Categories"
-                component={Home}
+                name="Offers"
+                component={Offers}
                 options={{
-                    tabBarLabel: "Categories",
+                    tabBarLabel: "Offers",
                     tabBarIcon: ({ color, size }) => <AntDesign name="isv" size={size} color={color} />,
                 }}
             />

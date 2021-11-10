@@ -1,32 +1,54 @@
 import React from "react";
 import { View, Text, ScrollView, ImageBackground, StyleSheet, FlatList, Image, TouchableOpacity, Button } from "react-native";
-
-import { Ionicons } from "@expo/vector-icons";
 import tw from "tailwind-react-native-classnames";
-import { SafeAreaView } from "react-native-safe-area-context";
+import Carousel from "../../components/CustomCarosel/Carousel";
+
 export default function Home() {
-    const data = [
-        { id: 1, name: "beer", image: { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" } },
-        { id: 2, name: "beer", image: { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" } },
-        { id: 3, name: "beer", image: { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" } },
-        { id: 4, name: "beer", image: { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" } },
-        { id: 5, name: "beer", image: { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" } },
-        { id: 6, name: "beer", image: { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" } },
-        { id: 7, name: "beer", image: { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" } },
-        { id: 7, name: "beer", image: { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" } },
+    const dummyData = [
+        {
+            title: "Classic Black Guitar",
+            url: "https://www.wallpapertip.com/wmimgs/15-154362_black-guitar-photos-wallpapers-guitar-wallpaper-hd.jpg",
+            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            id: 1,
+        },
+        {
+            title: "Acoustic Guitar",
+            url: "https://wallpaperaccess.com/full/3560410.jpg",
+            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            id: 2,
+        },
+        {
+            title: "Electric Guitar",
+            url: "https://wallpaperboat.com/wp-content/uploads/2019/04/electric-guitar-001.jpg",
+            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            id: 3,
+        },
     ];
+    const data = [
+        { id: 1, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 2, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 3, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 4, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 5, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 6, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 7, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 7, name: "beer", image: require("../../assets/icons/beer.png") },
+    ];
+
     const image = { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" };
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity style={tw`flex flex-col flex-grow drop-shadow-lg p-2 m-2 justify-center items-center bg-red-200 rounded-lg`}>
-            <Image source={image} style={{ width: 40, height: 40 }} />
+        <TouchableOpacity
+            style={tw`flex flex-col flex-grow drop-shadow-lg p-2 m-2 justify-center items-center shadow  bg-gray-200 rounded-lg`}
+        >
+            <Image source={item.image} style={{ width: 40, height: 40 }} />
 
             {/* <Ionicons name="md-checkmark-circle" size={32} color="green" /> */}
-            <Text style={tw`text-center`}>{item.name}</Text>
+            <Text style={tw`text-center font-bold text-gray-500`}>{item.name}</Text>
         </TouchableOpacity>
     );
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView nestedScrollEnabled={true} style={styles.container}>
             {/* banner */}
             <ImageBackground source={image} style={tw`h-60`} resizeMode="cover">
                 <View style={tw`mt-28 ml-5`}>
@@ -43,14 +65,17 @@ export default function Home() {
 
             {/* Categories */}
             <View style={tw`p-2`}>
-                <Text style={tw`text-base font-bold`}>Explore</Text>
-                <FlatList data={data} renderItem={renderItem} numColumns={4} />
+                <Text style={tw`text-lg font-bold`}>Explore</Text>
+                <FlatList data={data} renderItem={renderItem} numColumns={4} listMode="SCROLLVIEW" />
             </View>
+
+            {/* Carousel */}
+            <Carousel data={dummyData} />
 
             {/* Banners */}
             <View style={tw`p-2`}>
-                <Text style={tw`text-base font-bold`}>Featured</Text>
-                <FlatList data={data} renderItem={renderItem} numColumns={2} />
+                <Text style={tw`text-lg font-bold`}>Featured</Text>
+                <FlatList data={data} renderItem={renderItem} numColumns={2} listMode="SCROLLVIEW" />
             </View>
         </ScrollView>
     );
