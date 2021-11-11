@@ -13,8 +13,19 @@ const BottomNavigation = () => {
     return (
         <Tab.Navigator
             initialRouteName="Home"
+            tabBarOptions={{
+                indicatorStyle: {
+                    height: 0,
+                    backgroundColor: "transparent",
+                },
+                tabStyle: {
+                    paddingVertical: 5,
+                },
+            }}
             // tabBarOptions={{
-            //     activeTintColor: colors.secondary,
+            //     padding: 5,
+            //     // height: 45,
+            //     // activeTintColor: Colors.secondary,
             // }}
         >
             <Tab.Screen
@@ -23,7 +34,7 @@ const BottomNavigation = () => {
                 options={{
                     tabBarLabel: "Home",
                     headerShown: false,
-                    tabBarIcon: ({ color, size }) => <AntDesign name="home" color={color} size={size} />,
+                    tabBarIcon: ({ color, size }) => <AntDesign name="home" containerStyle={{ marginTop: 6 }} color={color} size={size} />,
                 }}
             />
             <Tab.Screen
@@ -31,7 +42,9 @@ const BottomNavigation = () => {
                 component={Home}
                 options={{
                     tabBarLabel: "Search",
-                    tabBarIcon: ({ color, size }) => <AntDesign name="search1" size={size} color={color} />,
+                    tabBarIcon: ({ color, size }) => (
+                        <AntDesign containerStyle={{ marginTop: 6 }} name="search1" size={size} color={color} />
+                    ),
                 }}
             />
             <Tab.Screen

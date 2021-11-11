@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, ScrollView, ImageBackground, StyleSheet, FlatList, Image, TouchableOpacity, Button } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import Carousel from "../../components/CustomCarosel/Carousel";
+import CustomFlatList from "../../components/CustomFlatList";
 
 export default function Home() {
     const dummyData = [
@@ -64,19 +65,13 @@ export default function Home() {
             </View> */}
 
             {/* Categories */}
-            <View style={tw`p-2`}>
-                <Text style={tw`text-lg font-bold`}>Explore</Text>
-                <FlatList data={data} renderItem={renderItem} numColumns={4} listMode="SCROLLVIEW" />
-            </View>
+            <CustomFlatList data={data} renderItem={renderItem} title="Explore" numColumns={4} />
 
             {/* Carousel */}
             <Carousel data={dummyData} />
 
             {/* Banners */}
-            <View style={tw`p-2`}>
-                <Text style={tw`text-lg font-bold`}>Featured</Text>
-                <FlatList data={data} renderItem={renderItem} numColumns={2} listMode="SCROLLVIEW" />
-            </View>
+            <CustomFlatList data={data} renderItem={renderItem} title="Featured" numColumns={2} />
         </ScrollView>
     );
 }
