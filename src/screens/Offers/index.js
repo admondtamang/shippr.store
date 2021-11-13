@@ -6,6 +6,7 @@ import CustomFlatList from "../../components/CustomFlatList";
 import tw from "tailwind-react-native-classnames";
 import Header from "../../components/Header";
 import { Feather } from "@expo/vector-icons";
+import ItemList from "../../components/CustomFlatList/ItemList";
 
 export default function Offers() {
     const navigation = useNavigation();
@@ -15,22 +16,15 @@ export default function Offers() {
         });
     }, [navigation]);
     const data = [
-        { id: 1, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 2, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 3, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 4, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 3, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 4, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 1, name: "beer", image: require("../../../assets/icons/beer.png") },
+        { id: 1, name: "music", image: require("../../../assets/icons/music.png") },
+        { id: 1, name: "Gadget", image: require("../../../assets/icons/electronic.png") },
+        { id: 1, name: "food", image: require("../../../assets/icons/food.png") },
+        { id: 1, name: "beer", image: require("../../../assets/icons/beer.png") },
+        { id: 1, name: "music", image: require("../../../assets/icons/music.png") },
+        { id: 1, name: "Gadget", image: require("../../../assets/icons/electronic.png") },
+        { id: 1, name: "food", image: require("../../../assets/icons/food.png") },
     ];
-
-    const renderItem = ({ item, index }) => (
-        <TouchableOpacity style={tw`ml-2`}>
-            <View style={tw`flex flex-col flex-grow  p-4 justify-center items-center bg-gray-400 shadow-md rounded-full`}>
-                <Image source={item.image} style={{ width: 30, height: 30 }} />
-            </View>
-            <Text style={tw`text-center text-black mt-1 uppercase w-full`}>{item.name}</Text>
-        </TouchableOpacity>
-    );
 
     return (
         <SafeAreaView style={tw`px-3`}>
@@ -39,7 +33,7 @@ export default function Offers() {
             <CustomFlatList
                 horizontal
                 data={data}
-                renderItem={renderItem}
+                type={ItemList.categoryRounded}
                 ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
@@ -50,12 +44,13 @@ export default function Offers() {
                 icon={<Feather name="heart" size={24} color="black" />}
                 horizontal
                 data={data}
-                product
+                type={ItemList.product}
                 showViewAll
                 twFlatListStyle={`mt-5`}
             />
 
             <CustomFlatList
+                type={ItemList.product}
                 title="Hot Offers"
                 icon={<Feather name="heart" size={24} color="black" />}
                 horizontal
@@ -66,6 +61,7 @@ export default function Offers() {
 
             <CustomFlatList
                 title="Hot Offers"
+                type={ItemList.product}
                 icon={<Feather name="heart" size={24} color="black" />}
                 horizontal
                 data={data}

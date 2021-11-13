@@ -3,6 +3,8 @@ import { View, Text, ScrollView, ImageBackground, StyleSheet, FlatList, Image, T
 import tw from "tailwind-react-native-classnames";
 import Carousel from "../../components/CustomCarosel/Carousel";
 import CustomFlatList from "../../components/CustomFlatList";
+import ItemList from "../../components/CustomFlatList/ItemList";
+import Banner from "./Banner";
 
 export default function Home() {
     const dummyData = [
@@ -26,81 +28,51 @@ export default function Home() {
         },
     ];
     const data = [
-        { id: 1, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 2, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 3, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 4, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 5, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 6, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 7, name: "beer", image: require("../../assets/icons/beer.png") },
-        { id: 7, name: "beer", image: require("../../assets/icons/beer.png") },
+        { id: 1, name: "beer", image: require("../../../assets/icons/beer.png") },
+        { id: 1, name: "music", image: require("../../../assets/icons/music.png") },
+        { id: 1, name: "Gadget", image: require("../../../assets/icons/electronic.png") },
+        { id: 1, name: "food", image: require("../../../assets/icons/food.png") },
+        { id: 1, name: "beer", image: require("../../../assets/icons/beer.png") },
+        { id: 1, name: "music", image: require("../../../assets/icons/music.png") },
+        { id: 1, name: "Gadget", image: require("../../../assets/icons/electronic.png") },
+        { id: 1, name: "food", image: require("../../../assets/icons/food.png") },
     ];
 
     const image = { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" };
 
     const renderItem = ({ item }) => (
         <TouchableOpacity
-            style={tw`flex flex-col flex-grow drop-shadow-lg p-2 m-2 justify-center items-center shadow  bg-gray-200 rounded-lg`}
+            style={tw`flex flex-col flex-grow drop-shadow-lg p-2 py-3 m-2 justify-center items-center shadow  bg-gray-200 rounded-lg`}
         >
-            <Image source={item.image} style={{ width: 40, height: 40 }} />
+            <Image source={item.image} style={{ width: 30, height: 30 }} />
 
             {/* <Ionicons name="md-checkmark-circle" size={32} color="green" /> */}
-            <Text style={tw`text-center font-bold text-gray-500`}>{item.name}</Text>
+            <Text style={tw`text-center font-bold text-gray-500 mt-1`}>{item.name}</Text>
         </TouchableOpacity>
     );
+
     return (
-        <ScrollView nestedScrollEnabled={true} style={styles.container}>
+        <ScrollView nestedScrollEnabled={true} style={tw`flex`}>
             {/* banner */}
-            <ImageBackground source={image} style={tw`h-60`} resizeMode="cover">
-                <View style={tw`mt-28 ml-5`}>
-                    <Text style={tw`text-xl text-white font-bold`}>Hi, User</Text>
-                    <Text style={tw`text-lg text-white pb-2`}>Are you looking for Gift?</Text>
-                    <TouchableOpacity style={tw`w-20 flex justify-center items-center p-1 rounded-sm bg-gray-100`}>
-                        <Text style={tw`font-bold`}>Buy Now</Text>
-                    </TouchableOpacity>
-                </View>
-            </ImageBackground>
-            {/* <View style={tw`p-4 android:pt-2 bg-red-300 flex-row`}>
-                <Text style={tw`text-md tracking-wide`}>Hello World</Text>
-            </View> */}
+            <Banner />
 
             {/* Categories */}
-            <CustomFlatList data={data} renderItem={renderItem} title="Explore" numColumns={4} />
+            <CustomFlatList data={data} type={ItemList.category} title="Explore" numColumns={4} />
 
             {/* Carousel */}
             <Carousel data={dummyData} />
 
             {/* Banners */}
-            <CustomFlatList data={data} renderItem={renderItem} title="Featured" numColumns={2} />
+            <CustomFlatList data={data} type={ItemList.product} title="Featured" numColumns={2} />
+
+            <CustomFlatList
+                horizontal
+                data={data}
+                type={ItemList.product}
+                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+            />
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: "bold",
-    },
-    image: {
-        flex: 1,
-        height: 300,
-        justifyContent: "center",
-    },
-    catImage: {
-        flex: 1,
-        height: 20,
-        width: 20,
-        justifyContent: "center",
-    },
-    text: {
-        color: "white",
-        fontSize: 42,
-        lineHeight: 84,
-        fontWeight: "bold",
-        textAlign: "center",
-        backgroundColor: "#000000c0",
-    },
-});

@@ -5,6 +5,7 @@ import Home from "../screens/Home";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import Offers from "../screens/Offers";
+import ProductDetail from "../screens/ProductDetail";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,12 +14,13 @@ const BottomNavigation = () => {
     return (
         <Tab.Navigator
             initialRouteName="Home"
-            tabBarOptions={{
+            screenOptions={{
                 indicatorStyle: {
                     height: 0,
                     backgroundColor: "transparent",
                 },
                 tabStyle: {
+                    height: 45,
                     paddingVertical: 5,
                 },
             }}
@@ -39,8 +41,9 @@ const BottomNavigation = () => {
             />
             <Tab.Screen
                 name="Search"
-                component={Home}
+                component={ProductDetail}
                 options={{
+                    headerShown: false,
                     tabBarLabel: "Search",
                     tabBarIcon: ({ color, size }) => (
                         <AntDesign containerStyle={{ marginTop: 6 }} name="search1" size={size} color={color} />
@@ -59,6 +62,8 @@ const BottomNavigation = () => {
                 name="Cart"
                 component={Home}
                 options={{
+                    headerShown: false,
+
                     title: "Cart",
                     // tabBarBadge: cartItems.length,
                     tabBarLabel: "Cart",
