@@ -21,8 +21,10 @@ const productItem = ({ item }) => (
             style={tw`w-36 h-48 rounded-lg`}
             source={{ uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" }}
         />
-        <Text style={tw`w-full my-1 text-sm mt-3`}>Puffer Jacket</Text>
-        <Text style={tw`font-bold text-base w-full`}>NRS. 500</Text>
+        <Text style={tw`w-full my-1 text-sm mt-3 truncate`}>Puffer Jacket</Text>
+        <Text style={tw`font-bold text-lg w-full`}>
+            <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text> 500
+        </Text>
     </View>
 );
 
@@ -32,7 +34,7 @@ const categoryRoundedItem = ({ item }) => (
         <View style={tw`flex flex-col flex-grow  p-4 justify-center items-center bg-gray-200 shadow-md rounded-full`}>
             <Image source={item.image} style={{ width: 30, height: 30 }} />
         </View>
-        <Text style={tw`text-center text-black mt-1 uppercase w-full`}>{item.name}</Text>
+        <Text style={tw`text-center text-black mt-1 capitalize tracking-wide w-full`}>{item.name}</Text>
     </TouchableOpacity>
 );
 export { productItem, categoryItem, categoryRoundedItem };

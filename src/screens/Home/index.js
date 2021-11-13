@@ -52,7 +52,7 @@ export default function Home() {
     );
 
     return (
-        <ScrollView nestedScrollEnabled={true} style={tw`flex`}>
+        <ScrollView nestedScrollEnabled={true} style={tw`flex pb-5`}>
             {/* banner */}
             <Banner />
 
@@ -62,13 +62,15 @@ export default function Home() {
             {/* Carousel */}
             <Carousel data={dummyData} />
 
-            {/* Banners */}
+            {/* Featured Products */}
             <CustomFlatList data={data} type={ItemList.product} title="Featured" numColumns={2} />
 
             <CustomFlatList
+                title="Featured"
                 horizontal
                 data={data}
                 type={ItemList.product}
+                twFlatListStyle={"mt-5"}
                 ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
