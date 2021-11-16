@@ -4,6 +4,7 @@ import Home from "../screens/Home";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomNavigation from "./BottomNavigation";
+import ProductDetail from "../screens/ProductDetail";
 
 export default function navigation() {
     return (
@@ -23,7 +24,7 @@ function RootNavigator() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomNavigation} options={{ headerShown: false }} />
-            {/* <Stack.Screen name="Home" component={Home} options={{ title: "Oops!" }} /> */}
+            <Stack.Screen name="ProductDetail" component={ProductDetail} />
             {/* <Stack.Group screenOptions={{ presentation: "modal" }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
             </Stack.Group> */}

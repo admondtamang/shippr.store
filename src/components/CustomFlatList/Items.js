@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import tw from "tailwind-react-native-classnames";
@@ -15,18 +16,45 @@ const categoryItem = ({ item }) => (
 );
 
 // Product item
-const productItem = ({ item }) => (
-    <View style={tw` mr-5`}>
-        <Image
-            style={tw`w-36 h-48 rounded-lg`}
-            source={{ uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" }}
-        />
-        <Text style={tw`w-full my-1 text-sm mt-3 truncate`}>Puffer Jacket</Text>
-        <Text style={tw`font-bold text-lg w-full`}>
-            <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text> 500
-        </Text>
-    </View>
-);
+const productItem = ({ item }, navigation) => {
+    const { id, name, price, regular_price, images, on_sale, slug } = item;
+
+    var discount;
+    // const navigation = useNavigation();
+    const onPress = () => {
+        console.log(navigation);
+        navigation.navigate("ProductDetail", {
+            slug,
+        });
+    };
+
+    if (regular_price) {
+        discount = ((regular_price - price) / regular_price) * 100;
+        discount = discount.toFixed(0);
+    }
+    // image validation choosing 1st image
+    let image;
+    if (typeof images == "object") {
+        image = images?.length > 0 ? "https://facebook.github.io/react/img/logo_small.png" : images[0].src;
+    }
+
+    return (
+        <TouchableOpacity onPress={onPress} style={tw` mr-5`}>
+            <Image
+                source={{
+                    uri: images?.length > 0 ? images[0]?.src : image,
+                }}
+                style={tw`w-36 h-48 rounded-lg`}
+            />
+            <Text numberOfLines={1} style={tw`w-full my-1 text-sm mt-3 truncate`}>
+                {name}
+            </Text>
+            <Text style={tw`font-bold text-lg w-full`}>
+                <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text> {price}
+            </Text>
+        </TouchableOpacity>
+    );
+};
 
 // Offer screen item
 const categoryRoundedItem = ({ item }) => (

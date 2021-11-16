@@ -6,6 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import Offers from "../screens/Offers";
 import ProductDetail from "../screens/ProductDetail";
+import Cart from "../screens/Cart";
 
 const Tab = createBottomTabNavigator();
 
@@ -60,7 +61,7 @@ const BottomNavigation = () => {
             />
             <Tab.Screen
                 name="Cart"
-                component={Home}
+                component={Cart}
                 options={{
                     headerShown: false,
 

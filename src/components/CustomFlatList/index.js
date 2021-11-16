@@ -3,6 +3,7 @@ import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { productItem, categoryItem, categoryRoundedItem } from "./Items";
 import list from "./ItemList";
+import { useNavigation } from "@react-navigation/core";
 
 export default function CustomFlatList({
     data,
@@ -17,6 +18,7 @@ export default function CustomFlatList({
     horizontal,
     ...rest
 }) {
+    const navigation = useNavigation();
     /**
      *
      * @param {*} item renderitem default params from ListView
@@ -27,7 +29,7 @@ export default function CustomFlatList({
             case list.category:
                 return categoryItem(item);
             case list.product:
-                return productItem(item);
+                return productItem(item, navigation);
             case list.categoryRounded:
                 return categoryRoundedItem(item);
             default:

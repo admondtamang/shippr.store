@@ -3,9 +3,11 @@ import React from "react";
 import { LogBox } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
-import Navigation from "./src/navigation";
+
+import { Provider as PaperProvider } from "react-native-paper";
 
 import { PersistGate } from "redux-persist/integration/react";
+import Navigation from "./src/navigation";
 
 import { persistStore } from "redux-persist";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -19,10 +21,12 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <SafeAreaProvider>
-                        <StatusBar style={"dark"} />
-                        <Navigation />
-                    </SafeAreaProvider>
+                    <PaperProvider>
+                        <SafeAreaProvider>
+                            <StatusBar style={"dark"} />
+                            <Navigation />
+                        </SafeAreaProvider>
+                    </PaperProvider>
                 </PersistGate>
             </Provider>
         </QueryClientProvider>

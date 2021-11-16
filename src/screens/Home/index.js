@@ -5,7 +5,8 @@ import Carousel from "../../components/CustomCarosel/Carousel";
 import CustomFlatList from "../../components/CustomFlatList";
 import ItemList from "../../components/CustomFlatList/ItemList";
 import Banner from "./Banner";
-
+import useFetchQuery from "../../hooks/useFetchQuery";
+import { STATUS } from "../../utils/constants";
 export default function Home() {
     const dummyData = [
         {
@@ -39,42 +40,45 @@ export default function Home() {
     ];
 
     const image = { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" };
+    const url = "wp-json/wc/v3/products";
 
-    const renderItem = ({ item }) => (
-        <TouchableOpacity
-            style={tw`flex flex-col flex-grow drop-shadow-lg p-2 py-3 m-2 justify-center items-center shadow  bg-gray-200 rounded-lg`}
-        >
-            <Image source={item.image} style={{ width: 30, height: 30 }} />
+    // useEffect(() => {
+    //     (()=>{
+    //         useFetch
+    //     })()
+    // }, [])
 
-            {/* <Ionicons name="md-checkmark-circle" size={32} color="green" /> */}
-            <Text style={tw`text-center font-bold text-gray-500 mt-1`}>{item.name}</Text>
-        </TouchableOpacity>
-    );
+    const { response, error, isLoading, status } = useFetchQuery("latest", url);
+    console.log("data", error, isLoading, status, response);
 
-    return (
-        <ScrollView nestedScrollEnabled={true} style={tw`flex pb-5`}>
-            {/* banner */}
-            <Banner />
+    if (STATUS.loading == status) {
+        return <Text>Loading</Text>;
+    }
+    if (STATUS.success == status)
+        return (
+            <ScrollView nestedScrollEnabled={true} style={tw`flex pb-5`}>
+                {/* banner */}
+                <Banner />
 
-            {/* Categories */}
-            <CustomFlatList data={data} type={ItemList.category} title="Explore" numColumns={4} />
+                {/* Categories */}
+                <CustomFlatList data={data} type={ItemList.category} title="Explore" numColumns={4} />
 
-            {/* Carousel */}
-            <Carousel data={dummyData} />
+                {/* Carousel */}
+                <Carousel data={dummyData} />
 
-            {/* Featured Products */}
-            <CustomFlatList data={data} type={ItemList.product} title="Featured" numColumns={2} />
+                {/* Featured Products */}
+                <CustomFlatList data={response} type={ItemList.product} title="Featured" numColumns={2} />
 
-            <CustomFlatList
-                title="Featured"
-                horizontal
-                data={data}
-                type={ItemList.product}
-                twFlatListStyle={"mt-5"}
-                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
-                showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-            />
-        </ScrollView>
-    );
+                <CustomFlatList
+                    title="Featured"
+                    horizontal
+                    data={data}
+                    type={ItemList.product}
+                    twFlatListStyle={"mt-5"}
+                    ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
+            </ScrollView>
+        );
 }
