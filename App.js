@@ -12,6 +12,7 @@ import Navigation from "./src/navigation";
 import { persistStore } from "redux-persist";
 import { QueryClient, QueryClientProvider } from "react-query";
 import store from "./src/redux/configureStore";
+import Toast from "react-native-toast-message";
 
 export default function App() {
     LogBox.ignoreAllLogs(true);
@@ -23,6 +24,7 @@ export default function App() {
                 <PersistGate loading={null} persistor={persistor}>
                     <PaperProvider>
                         <SafeAreaProvider>
+                            <Toast />
                             <StatusBar style={"dark"} />
                             <Navigation />
                         </SafeAreaProvider>

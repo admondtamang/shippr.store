@@ -1,10 +1,47 @@
-import React from "react";
-import { View, Text } from "react-native";
+import * as React from "react";
+import { ImageBackground, StyleSheet } from "react-native";
+import { List } from "react-native-paper";
+import tw from "tailwind-react-native-classnames";
 
-export default function Search() {
+const Category = () => {
+    const [expanded, setExpanded] = React.useState(true);
+
+    const handlePress = () => setExpanded(!expanded);
+
+    const image = {
+        uri: "https://www.analyticssteps.com/backend/media/thumbnail/6743613/7557273_1606234814_nyka.jpg",
+    };
+
     return (
-        <View>
-            <Text>Search</Text>
-        </View>
+        <List.Section>
+            <List.Accordion style={tw`h-44 bg-blue-200`} image={image}>
+                <List.Item title="First item" />
+                <List.Item title="Second item" />
+            </List.Accordion>
+
+            <List.Accordion style={tw`h-44 bg-blue-200`} image={image}>
+                <List.Item title="First item" />
+                <List.Item title="Second item" />
+            </List.Accordion>
+        </List.Section>
     );
-}
+};
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    image: {
+        flex: 1,
+        justifyContent: "center",
+    },
+    text: {
+        color: "white",
+        fontSize: 42,
+        lineHeight: 84,
+        fontWeight: "bold",
+        textAlign: "center",
+        backgroundColor: "#000000c0",
+    },
+});
+
+export default Category;

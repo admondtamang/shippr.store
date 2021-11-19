@@ -24,7 +24,7 @@ function RootNavigator() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomNavigation} options={{ headerShown: false }} />
-            <Stack.Screen name="ProductDetail" component={ProductDetail} />
+            <Stack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: false }} />
             {/* <Stack.Group screenOptions={{ presentation: "modal" }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
             </Stack.Group> */}

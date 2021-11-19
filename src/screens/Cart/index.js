@@ -32,9 +32,12 @@ export default function Cart({ navigation }) {
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={renderItem}
                     />
-                    <Button style={{ marginTop: 20 }} mode="contained" onPress={() => navigation.navigate("Checkout")}>
-                        Proceed To Checkout
-                    </Button>
+                    <Button
+                        title="Proceed To Checkout"
+                        style={{ marginTop: 20 }}
+                        mode="contained"
+                        onPress={() => navigation.navigate("Checkout")}
+                    />
                 </>
             )}
         </SafeAreaView>

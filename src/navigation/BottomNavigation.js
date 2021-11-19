@@ -5,8 +5,9 @@ import Home from "../screens/Home";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import Offers from "../screens/Offers";
-import ProductDetail from "../screens/ProductDetail";
+import Search from "../screens/Search";
 import Cart from "../screens/Cart";
+import { TouchableRipple } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,12 +38,23 @@ const BottomNavigation = () => {
                 options={{
                     tabBarLabel: "Home",
                     headerShown: false,
-                    tabBarIcon: ({ color, size }) => <AntDesign name="home" containerStyle={{ marginTop: 6 }} color={color} size={size} />,
+                    tabBarIcon: ({ color, size }) => (
+                        <TouchableRipple
+                            accessibilityTraits="button"
+                            accessibilityComponentType="button"
+                            accessibilityRole="button"
+                            delayPressIn={0}
+                            borderless
+                            rippleColor="rgba(0, 0, 0, .32)"
+                        >
+                            <AntDesign name="home" containerStyle={{ marginTop: 6 }} color={color} size={size} />
+                        </TouchableRipple>
+                    ),
                 }}
             />
             <Tab.Screen
                 name="Search"
-                component={ProductDetail}
+                component={Search}
                 options={{
                     headerShown: false,
                     tabBarLabel: "Search",
