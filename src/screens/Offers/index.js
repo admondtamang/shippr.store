@@ -54,6 +54,7 @@ export default function Offers() {
                 data={response}
                 type={ItemList.product}
                 showViewAll
+                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
                 twFlatListStyle={`mt-5`}
             />
 
@@ -63,6 +64,7 @@ export default function Offers() {
                 icon={<Feather name="feather" size={24} color="black" />}
                 horizontal
                 data={response}
+                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
                 product
                 twFlatListStyle={`mt-5`}
             />
@@ -73,6 +75,7 @@ export default function Offers() {
                 icon={<Feather name="heart" size={24} color="black" />}
                 horizontal
                 data={response}
+                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
                 product
                 twFlatListStyle={`mt-5`}
             />

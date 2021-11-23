@@ -1,7 +1,7 @@
 import { configureStore, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit";
 
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // import userSlice from "./user/userSlice";
 // import productSlice from "./product/productSlice";
 import cartSlice from "./cart/cartSlice";

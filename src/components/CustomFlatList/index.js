@@ -57,6 +57,7 @@ export default function CustomFlatList({
                 data={data}
                 keyExtractor={(item, key) => key}
                 renderItem={handleRenderItem}
+                style={tw`${twFlatListStyle}`}
                 {...(numColumns ? { numColumns: numColumns, ...rest } : { ...rest, horizontal })}
             />
         </View>

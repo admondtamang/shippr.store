@@ -13,11 +13,21 @@ import { persistStore } from "redux-persist";
 import { QueryClient, QueryClientProvider } from "react-query";
 import store from "./src/redux/configureStore";
 import Toast from "react-native-toast-message";
+import { useFonts } from "expo-font";
 
 export default function App() {
     LogBox.ignoreAllLogs(true);
     const queryClient = new QueryClient();
     let persistor = persistStore(store);
+
+    const [loaded] = useFonts({
+        Montserrat: require("./assets/fonts/Montserrat-Bold.ttf"),
+    });
+
+    if (!loaded) {
+        return null;
+    }
+
     return (
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>

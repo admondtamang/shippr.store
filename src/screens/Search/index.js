@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ImageBackground, StyleSheet } from "react-native";
+import { ImageBackground, StyleSheet, SafeAreaView } from "react-native";
 import { List } from "react-native-paper";
 import tw from "tailwind-react-native-classnames";
 
@@ -13,17 +13,19 @@ const Category = () => {
     };
 
     return (
-        <List.Section>
-            <List.Accordion style={tw`h-44 bg-blue-200`} image={image}>
-                <List.Item title="First item" />
-                <List.Item title="Second item" />
-            </List.Accordion>
+        <SafeAreaView>
+            <List.Section>
+                <List.Accordion style={tw`h-44 bg-blue-200`} image={image}>
+                    <List.Item title="First item" />
+                    <List.Item title="Second item" />
+                </List.Accordion>
 
-            <List.Accordion style={tw`h-44 bg-blue-200`} image={image}>
-                <List.Item title="First item" />
-                <List.Item title="Second item" />
-            </List.Accordion>
-        </List.Section>
+                <List.Accordion style={tw`h-44 bg-blue-200`} image={image}>
+                    <List.Item title="First item" />
+                    <List.Item title="Second item" />
+                </List.Accordion>
+            </List.Section>
+        </SafeAreaView>
     );
 };
 const styles = StyleSheet.create({

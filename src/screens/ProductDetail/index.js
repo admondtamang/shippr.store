@@ -11,10 +11,12 @@ import useFetch from "../../hooks/useFetch";
 import SwiperComponent from "../../components/SwiperComponent";
 
 import Toast from "react-native-toast-message";
+import { ToggleButton } from "react-native-paper";
 export default function ProductDetail({ route, navigation }) {
     const slug = route.params.slug;
     let url = "/wp-json/wc/v3/products?slug=" + slug;
 
+    const [value, setValue] = React.useState("left");
     const dispatch = useDispatch();
 
     const response = [
@@ -185,14 +187,27 @@ export default function ProductDetail({ route, navigation }) {
 
                 {/* Product Detail */}
                 <ScrollView style={tw`h-full  p-3`}>
-                    <Text style={tw`font-bold text-lg text-gray-900 leading-8`}>{name}</Text>
-                    <Text style={tw`font-bold text-xl w-full pt-2 `}>
-                        <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text>
-                        {price}
-                        {on_sale && <Text style={tw`line-through text-sm text-red-300 pl-2`}>{regular_price}</Text>}
-                    </Text>
+                    <Text style={tw.style(`font-bold text-lg text-gray-900 leading-7`)}>{name}</Text>
+                    <View style={tw`flex flex-row  justify-between `}>
+                        <Text style={tw`font-bold text-xl  pt-2 `}>
+                            <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text>
+                            {price}
+                            {on_sale && <Text style={tw`line-through text-sm text-red-300 pl-2`}>{regular_price}</Text>}
+                        </Text>
+                        <Text style={tw`font-bold  text-gray-600 `}>In Stock</Text>
+                    </View>
 
-                    <HTML containerStyle={{ marginTop: 0 }} source={{ html: description }} contentWidth={WIDTH} />
+                    {/* Product Description */}
+                    <View style={tw`relative pt-6`}>
+                        <Text style={tw`font-bold absolute text-gray-600 text-lg w-full pt-2`}>About</Text>
+                        <HTML source={{ html: description }} contentWidth={WIDTH} />
+                    </View>
+
+                    {/* Color */}
+                    <ToggleButton.Row onValueChange={(value) => setValue(value)} value={value}>
+                        <ToggleButton icon="format-align-left" value="left" />
+                        <ToggleButton icon="format-align-right" value="right" />
+                    </ToggleButton.Row>
                 </ScrollView>
 
                 {/* Add to cart button */}

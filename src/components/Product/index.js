@@ -3,7 +3,7 @@ import React from "react";
 import { Text, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import styled from "styled-components";
-import { Badge } from "react-native-paper";
+import { Badge, Surface } from "react-native-paper";
 
 export default function Product({ item }) {
     const navigation = useNavigation();
@@ -34,6 +34,10 @@ export default function Product({ item }) {
     const Container = styled.TouchableOpacity`
         width: ${(props) => (props.column ? "140px" : "180px")};
         position: relative;
+        background-color: white;
+        padding-left: 7px;
+        padding-right: 7px;
+        padding-top: 7px;
         border-radius: 5px;
         margin-bottom: 15px;
     `;
@@ -46,7 +50,7 @@ export default function Product({ item }) {
     `;
 
     return (
-        <Container onPress={onPress} style={tw` mr-2`}>
+        <Container onPress={onPress} style={tw`white rounded mr-2`}>
             <Image
                 source={{
                     uri: images?.length > 0 ? images[0]?.src : image,
