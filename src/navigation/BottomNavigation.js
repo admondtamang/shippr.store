@@ -5,27 +5,30 @@ import Home from "../screens/Home";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import Offers from "../screens/Offers";
-import Search from "../screens/Search";
+import Categories from "../screens/Categories";
 import Cart from "../screens/Cart";
-import { TouchableRipple } from "react-native-paper";
-
+import { TouchableRipple } from "@admond/react-native-paper";
+import CategoryDetail from "../screens/CategoryDetail";
+import { BlurView } from "expo-blur";
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
-    // const cartItems = useSelector((state) => state.cart.cartItems);
+    const cartItems = useSelector((state) => state.cart.cartItems);
     return (
         <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                indicatorStyle: {
-                    height: 0,
-                    backgroundColor: "transparent",
-                },
-                tabStyle: {
+                tabBarStyle: {
+                    position: "absolute",
+                    padding: 5,
                     height: 45,
-                    paddingVertical: 5,
                 },
+                headerStyle: {
+                    height: 90, // Specify the height of your custom header
+                },
+                // tabBarBackground: () => <BlurView tint="light" intensity={0} />,
             }}
+
             // tabBarOptions={{
             //     padding: 5,
             //     // height: 45,
@@ -53,11 +56,22 @@ const BottomNavigation = () => {
                 }}
             />
             <Tab.Screen
-                name="Search"
-                component={Search}
+                name="Categories"
+                component={Categories}
                 options={{
                     headerShown: false,
-                    tabBarLabel: "Search",
+                    tabBarLabel: "Categories",
+                    tabBarIcon: ({ color, size }) => (
+                        <AntDesign containerStyle={{ marginTop: 6 }} name="antdesign" size={size} color={color} />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="CategoryDetail"
+                component={CategoryDetail}
+                options={{
+                    headerShown: false,
+                    tabBarLabel: "Detail",
                     tabBarIcon: ({ color, size }) => (
                         <AntDesign containerStyle={{ marginTop: 6 }} name="search1" size={size} color={color} />
                     ),
@@ -78,7 +92,7 @@ const BottomNavigation = () => {
                     headerShown: false,
 
                     title: "Cart",
-                    // tabBarBadge: cartItems.length,
+                    tabBarBadge: cartItems.length,
                     tabBarLabel: "Cart",
                     tabBarIcon: ({ color, size }) => <AntDesign name="shoppingcart" size={size} color={color} />,
                 }}

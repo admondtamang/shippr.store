@@ -4,7 +4,7 @@ import { LogBox } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 
-import { Provider as PaperProvider } from "react-native-paper";
+import { Provider as PaperProvider } from "@admond/react-native-paper";
 
 import { PersistGate } from "redux-persist/integration/react";
 import Navigation from "./src/navigation";

@@ -44,9 +44,12 @@ export default function CustomFlatList({
                 {icon && icon}
                 {title && <Text style={tw`text-lg font-bold p-2`}>{title}</Text>}
             </View>
-            <TouchableOpacity>
-                <Text style={tw`font-bold`}> {showViewAll ? "View All" : " "}</Text>
-            </TouchableOpacity>
+
+            {showViewAll && (
+                <TouchableOpacity>
+                    <Text style={tw`font-bold mr-3 p-2 rounded-lg bg-gray-300`}>More</Text>
+                </TouchableOpacity>
+            )}
         </View>
     );
 
@@ -57,6 +60,8 @@ export default function CustomFlatList({
                 data={data}
                 keyExtractor={(item, key) => key}
                 renderItem={handleRenderItem}
+                showsVerticalScrollIndicator={false}
+                // showsHorizontalScrollIndicator={false}
                 style={tw`${twFlatListStyle}`}
                 {...(numColumns ? { numColumns: numColumns, ...rest } : { ...rest, horizontal })}
             />

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useLayoutEffect } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomFlatList from "../../components/CustomFlatList";
 import tw from "tailwind-react-native-classnames";
@@ -32,7 +32,7 @@ export default function Offers() {
     const { error, isLoading, status } = useFetchQuery("latest", url);
 
     return (
-        <SafeAreaView style={tw`px-3`}>
+        <ScrollView style={tw`py-9 `}>
             <View style={tw`mb-5`}>
                 <Header />
                 {/* Category FLatlist */}
@@ -40,7 +40,7 @@ export default function Offers() {
                     horizontal
                     data={data}
                     type={ItemList.categoryRounded}
-                    ItemSeparatorComponent={() => <View style={{ width: 8 }} />}
+                    ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}
                 />
@@ -54,8 +54,8 @@ export default function Offers() {
                 data={response}
                 type={ItemList.product}
                 showViewAll
-                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
-                twFlatListStyle={`mt-5`}
+                ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
+                twFlatListStyle={`mt-1`}
             />
 
             <CustomFlatList
@@ -64,9 +64,7 @@ export default function Offers() {
                 icon={<Feather name="feather" size={24} color="black" />}
                 horizontal
                 data={response}
-                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
-                product
-                twFlatListStyle={`mt-5`}
+                ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
             />
 
             <CustomFlatList
@@ -75,10 +73,8 @@ export default function Offers() {
                 icon={<Feather name="heart" size={24} color="black" />}
                 horizontal
                 data={response}
-                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
-                product
-                twFlatListStyle={`mt-5`}
+                ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
             />
-        </SafeAreaView>
+        </ScrollView>
     );
 }

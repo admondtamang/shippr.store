@@ -1,9 +1,10 @@
 import * as React from "react";
-import { ImageBackground, StyleSheet, SafeAreaView } from "react-native";
-import { List } from "react-native-paper";
+import { ImageBackground, StyleSheet } from "react-native";
+import { List } from "@admond/react-native-paper";
 import tw from "tailwind-react-native-classnames";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const Category = () => {
+const Categories = () => {
     const [expanded, setExpanded] = React.useState(true);
 
     const handlePress = () => setExpanded(!expanded);
@@ -46,4 +47,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Category;
+export default Categories;

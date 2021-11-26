@@ -8,6 +8,7 @@ import Banner from "./Banner";
 import useFetchQuery from "../../hooks/useFetchQuery";
 import { STATUS } from "../../utils/constants";
 import response from "../response";
+// import CustomBottomSheet from "../../components/CustomBottomSheet";
 export default function Home() {
     const dummyData = [
         {
@@ -54,6 +55,7 @@ export default function Home() {
         <ScrollView nestedScrollEnabled={true} style={tw`flex pb-5`}>
             {/* banner */}
             <Banner />
+            {/* <CustomBottomSheet /> */}
 
             {/* Categories */}
             <CustomFlatList data={data} type={ItemList.category} title="Explore" numColumns={4} />
@@ -69,8 +71,7 @@ export default function Home() {
                 horizontal
                 data={response}
                 type={ItemList.product}
-                twFlatListStyle={"m-5"}
-                ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+                ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
             />

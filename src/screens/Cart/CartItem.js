@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Image, Text, View } from "react-native";
-import { IconButton, List, Title, Subheading } from "react-native-paper";
+import { IconButton, List, Title, Subheading } from "@admond/react-native-paper";
 import styled from "styled-components";
 import { DECREASE_CART, INCREASE_CART, REMOVE_FROM_CART } from "../../redux/cart/cartSlice";
 import { useDispatch } from "react-redux";

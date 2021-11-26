@@ -11,7 +11,7 @@ import useFetch from "../../hooks/useFetch";
 import SwiperComponent from "../../components/SwiperComponent";
 
 import Toast from "react-native-toast-message";
-import { ToggleButton } from "react-native-paper";
+import { ToggleButton } from "@admond/react-native-paper";
 export default function ProductDetail({ route, navigation }) {
     const slug = route.params.slug;
     let url = "/wp-json/wc/v3/products?slug=" + slug;
@@ -153,7 +153,7 @@ export default function ProductDetail({ route, navigation }) {
     // }
 
     if (isResolved || response) {
-        console.log(response);
+        // console.log(response);
         const { id, price, variations, name, on_sale, description, regular_price, images } = response[0];
         const pictures = images?.map((img) => {
             return { uri: img.src };
