@@ -3,6 +3,7 @@ import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { productItem, categoryItem, categoryRoundedItem } from "./Items";
 import list from "./ItemList";
+import RippleButton from "../RippleButton";
 
 export default function CustomFlatList({
     data,
@@ -46,9 +47,9 @@ export default function CustomFlatList({
             </View>
 
             {showViewAll && (
-                <TouchableOpacity>
+                <RippleButton onPress={() => null}>
                     <Text style={tw`font-bold mr-3 p-2 rounded-lg bg-gray-300`}>More</Text>
-                </TouchableOpacity>
+                </RippleButton>
             )}
         </View>
     );

@@ -3,7 +3,8 @@ import React from "react";
 import { Text, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import styled from "styled-components";
-import { Badge, Surface } from "@admond/react-native-paper";
+import { Badge, Surface, TouchableRipple } from "@admond/react-native-paper";
+import RippleButton from "../RippleButton";
 
 export default function Product({ item }) {
     const navigation = useNavigation();
@@ -31,7 +32,7 @@ export default function Product({ item }) {
     }
 
     // Styled Component
-    const Container = styled.TouchableOpacity`
+    const Container = styled(RippleButton)`
         width: ${(props) => (props.column ? "140px" : "180px")};
         position: relative;
         background-color: white;
@@ -51,22 +52,24 @@ export default function Product({ item }) {
 
     return (
         <Container onPress={onPress} style={tw`rounded mr-2`}>
-            <Image
-                source={{
-                    uri: images?.length > 0 ? images[0]?.src : image,
-                }}
-                style={tw`w-full h-48 rounded-lg`}
-            />
+            <>
+                <Image
+                    source={{
+                        uri: images?.length > 0 ? images[0]?.src : image,
+                    }}
+                    style={tw`w-full h-48 rounded-lg`}
+                />
 
-            <Text numberOfLines={1} style={tw`w-full my-1 text-sm mt-3`}>
-                {name}
-            </Text>
-            <Text style={tw`font-bold text-lg w-full`}>
-                <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text>
-                {price}
-                {on_sale && <Text style={tw`line-through text-sm text-red-300 pl-2`}>{regular_price}</Text>}
-            </Text>
-            {discount != 0 && <StyledBadge>-{discount}%</StyledBadge>}
+                <Text numberOfLines={1} style={tw`w-full my-1 text-sm mt-3`}>
+                    {name}
+                </Text>
+                <Text style={tw`font-bold text-lg w-full`}>
+                    <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text>
+                    {price}
+                    {on_sale && <Text style={tw`line-through text-sm text-red-300 pl-2`}>{regular_price}</Text>}
+                </Text>
+                {discount != 0 && <StyledBadge>-{discount}%</StyledBadge>}
+            </>
         </Container>
     );
 }

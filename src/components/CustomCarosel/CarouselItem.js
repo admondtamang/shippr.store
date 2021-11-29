@@ -1,18 +1,23 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
+import RippleButton from "../RippleButton";
 
 const { width, height } = Dimensions.get("window");
 
 const carouselHeight = height / 5;
-const CarouselItem = ({ item, navigation }) => {
-    // function onPress(id) {
-    //     navigation.navigate("ProductCategory", {
-    //         id: id,
-    //     });
-    // }
+const CarouselItem = ({ item }) => {
+    const navigation = useNavigation();
+    function onPress(id) {
+        navigation.navigate("ProductCategory", {
+            id: id,
+        });
+    }
     return (
         <View style={styles.cardView}>
-            <Image style={styles.image} source={{ uri: item.url }} />
+            <RippleButton onPress={() => onPress(2)}>
+                <Image style={styles.image} source={{ uri: item.url }} />
+            </RippleButton>
             <View style={styles.textView}>
                 <Text style={styles.itemTitle}> {item.title}</Text>
                 <Text style={styles.itemDescription}>{item.description}</Text>

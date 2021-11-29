@@ -11,11 +11,12 @@ import useFetch from "../../hooks/useFetch";
 import SwiperComponent from "../../components/SwiperComponent";
 
 import Toast from "react-native-toast-message";
-import { ToggleButton } from "@admond/react-native-paper";
+import { ToggleButton, TouchableRipple } from "@admond/react-native-paper";
+import RippleButton from "../../components/RippleButton";
 export default function ProductDetail({ route, navigation }) {
     const slug = route.params.slug;
     let url = "/wp-json/wc/v3/products?slug=" + slug;
-
+    let discount;
     const [value, setValue] = React.useState("left");
     const dispatch = useDispatch();
 
@@ -158,6 +159,12 @@ export default function ProductDetail({ route, navigation }) {
         const pictures = images?.map((img) => {
             return { uri: img.src };
         });
+        if (regular_price) {
+            discount = ((regular_price - price) / regular_price) * 100;
+            discount = discount.toFixed(0);
+        }
+        // image validation choosing 1st image
+        const image = images.length <= 0 ? "https://facebook.github.io/react/img/logo_small.png" : images[0].src;
 
         function handleAddToCart() {
             dispatch(ADD_TO_CART({ product_id: id, variation_id: 0, quantity: 1, images, price, name }));
@@ -172,52 +179,82 @@ export default function ProductDetail({ route, navigation }) {
         return (
             <SafeAreaView style={tw`flex h-full bg-blue`}>
                 {/* Back button has absoult attribute */}
-                <TouchableOpacity
+                <RippleButton
                     onPress={() => navigation.goBack()}
                     style={tw`absolute top-9 left-5 p-1 rounded-full flex justify-center items-center flex-row bg-white z-50 `}
                 >
-                    <AntDesign name="leftcircle" size={24} color="orange" />
-                    <Text style={tw`font-bold text-base ml-2 pr-2 shadow text-yellow-600`}>Back</Text>
-                </TouchableOpacity>
+                    <>
+                        <AntDesign name="leftcircle" size={24} color="orange" />
+                        <Text style={tw`font-bold text-base ml-2 pr-2 shadow text-yellow-600`}>Back</Text>
+                    </>
+                </RippleButton>
 
                 {/* Image Slider */}
-                <View style={tw`h-2/5 w-full`}>
+                <View style={tw`h-3/5 w-full`}>
                     <SwiperComponent images={pictures} />
                 </View>
 
                 {/* Product Detail */}
-                <ScrollView style={tw`h-full  p-3`}>
-                    <Text style={tw.style(`font-bold text-lg text-gray-900 leading-7`)}>{name}</Text>
-                    <View style={tw`flex flex-row  justify-between `}>
-                        <Text style={tw`font-bold text-xl  pt-2 `}>
-                            <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text>
-                            {price}
-                            {on_sale && <Text style={tw`line-through text-sm text-red-300 pl-2`}>{regular_price}</Text>}
-                        </Text>
-                        <Text style={tw`font-bold  text-gray-600 `}>In Stock</Text>
+                <ScrollView style={tw`h-full p-3 bg-white`}>
+                    <RippleButton ripple={10} onPress={() => null}>
+                        <Text style={tw.style(`font-bold text-lg text-gray-900 leading-7 `)}>{name}</Text>
+                    </RippleButton>
+
+                    {/* Favourite */}
+                    <View style={tw`flex flex-row justify-between py-2`}>
+                        <View style={tw`flex flex-row`}>
+                            <View style={tw`flex flex-row pr-2`}>
+                                <AntDesign name="star" size={18} color="orange" />
+                                <AntDesign name="star" size={18} color="orange" />
+                                <AntDesign name="star" size={18} color="orange" />
+                                <AntDesign name="star" size={18} color="orange" />
+                                <AntDesign name="star" size={18} color="orange" />
+                            </View>
+                            <Text style={tw`font-bold`}>(20 reviews)</Text>
+                        </View>
+
+                        <Text style={tw`font-bold text-gray-600 pr-2`}>In Stock</Text>
+                    </View>
+                    {/* <View style={tw`border-b-2 border-gray-300 pb-2 `} /> */}
+
+                    <View style={tw`flex flex-row justify-between pt-2 `}>
+                        <View style={tw` flex flex-col`}>
+                            <Text style={tw`font-bold text-xl text-gray-600 `}>Rs. {price}</Text>
+                            <View style={tw` flex flex-row`}>
+                                {on_sale && (
+                                    <Text style={tw`font-bold line-through text-base text-gray-500 block`}>Rs. {regular_price}</Text>
+                                )}
+                                <Text style={tw`bg-blue-200 p-1 ml-4 text-xs rounded text-blue-800 font-bold`}>{discount}% OFF</Text>
+                            </View>
+                        </View>
+                        <View></View>
                     </View>
 
                     {/* Product Description */}
                     <View style={tw`relative pt-6`}>
-                        <Text style={tw`font-bold absolute text-gray-600 text-lg w-full pt-2`}>About</Text>
+                        <Text style={tw`font-bold absolute text-gray-800 text-base w-full pt-2`}>Description</Text>
                         <HTML source={{ html: description }} contentWidth={WIDTH} />
                     </View>
 
                     {/* Color */}
                     <ToggleButton.Row onValueChange={(value) => setValue(value)} value={value}>
+                        <Text style={tw`font-bold text-gray-600 text-lg w-full pt-2`}>Size</Text>
+
                         <ToggleButton icon="format-align-left" value="left" />
                         <ToggleButton icon="format-align-right" value="right" />
                     </ToggleButton.Row>
                 </ScrollView>
 
                 {/* Add to cart button */}
-                <TouchableOpacity
-                    onPress={handleAddToCart}
-                    style={tw`w-full static my-2 py-2 flex flex-row shadow-sm text-center bg-yellow-100 rounded-xl mt-4 flex justify-center items-center`}
-                >
-                    <Icon name="shopping-basket" size={20} color="orange" />
-                    <Text style={tw`font-bold text-base ml-2 shadow text-yellow-600`}>Add To Cart</Text>
-                </TouchableOpacity>
+                <View style={tw`w-full p-2 static `}>
+                    <TouchableOpacity
+                        onPress={handleAddToCart}
+                        style={tw`p-3 flex flex-row shadow-sm text-center bg-blue-800 rounded-lg  flex justify-center items-center`}
+                    >
+                        <Icon name="shopping-basket" size={20} color="white" />
+                        <Text style={tw`font-bold text-base ml-2 text-white shadow `}>Add To Cart</Text>
+                    </TouchableOpacity>
+                </View>
             </SafeAreaView>
         );
     }

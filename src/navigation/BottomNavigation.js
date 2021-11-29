@@ -21,19 +21,11 @@ const BottomNavigation = () => {
                 tabBarStyle: {
                     position: "absolute",
                     padding: 5,
-                    height: 45,
-                },
-                headerStyle: {
-                    height: 90, // Specify the height of your custom header
+                    paddingBottom: 5,
+                    height: 55,
                 },
                 // tabBarBackground: () => <BlurView tint="light" intensity={0} />,
             }}
-
-            // tabBarOptions={{
-            //     padding: 5,
-            //     // height: 45,
-            //     // activeTintColor: Colors.secondary,
-            // }}
         >
             <Tab.Screen
                 name="Home"
@@ -41,7 +33,7 @@ const BottomNavigation = () => {
                 options={{
                     tabBarLabel: "Home",
                     headerShown: false,
-                    tabBarIcon: ({ color, size }) => (
+                    tabBarIcon: ({ color, focused, size }) => (
                         <TouchableRipple
                             accessibilityTraits="button"
                             accessibilityComponentType="button"
@@ -50,7 +42,7 @@ const BottomNavigation = () => {
                             borderless
                             rippleColor="rgba(0, 0, 0, .32)"
                         >
-                            <AntDesign name="home" containerStyle={{ marginTop: 6 }} color={color} size={size} />
+                            <AntDesign name="home" containerStyle={{ marginTop: focused ? 18 : 6 }} color={color} size={size} />
                         </TouchableRipple>
                     ),
                 }}
