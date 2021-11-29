@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, SafeAreaView, ToastAndroid } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { WIDTH } from "../../utils/screenSize";
@@ -11,13 +11,14 @@ import useFetch from "../../hooks/useFetch";
 import SwiperComponent from "../../components/SwiperComponent";
 
 import Toast from "react-native-toast-message";
-import { ToggleButton, TouchableRipple } from "@admond/react-native-paper";
+import { Divider, IconButton, Subheading, ToggleButton, TouchableRipple } from "@admond/react-native-paper";
 import RippleButton from "../../components/RippleButton";
 export default function ProductDetail({ route, navigation }) {
     const slug = route.params.slug;
     let url = "/wp-json/wc/v3/products?slug=" + slug;
     let discount;
     const [value, setValue] = React.useState("left");
+    const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
 
     const response = [
@@ -167,13 +168,17 @@ export default function ProductDetail({ route, navigation }) {
         const image = images.length <= 0 ? "https://facebook.github.io/react/img/logo_small.png" : images[0].src;
 
         function handleAddToCart() {
-            dispatch(ADD_TO_CART({ product_id: id, variation_id: 0, quantity: 1, images, price, name }));
+            dispatch(ADD_TO_CART({ product_id: id, variation_id: 0, quantity, images, price, name }));
             Toast.show({
                 type: "success",
                 text1: "Hello",
                 text2: "This is some something 👋",
             });
             ToastAndroid.showWithGravity("Product added to cart", ToastAndroid.SHORT, ToastAndroid.CENTER);
+        }
+        function handleQuantity(value) {
+            if (value < 1) setQuantity(1);
+            else setQuantity(value);
         }
 
         return (
@@ -183,10 +188,8 @@ export default function ProductDetail({ route, navigation }) {
                     onPress={() => navigation.goBack()}
                     style={tw`absolute top-9 left-5 p-1 rounded-full flex justify-center items-center flex-row bg-white z-50 `}
                 >
-                    <>
-                        <AntDesign name="leftcircle" size={24} color="orange" />
-                        <Text style={tw`font-bold text-base ml-2 pr-2 shadow text-yellow-600`}>Back</Text>
-                    </>
+                    <AntDesign name="leftcircle" size={24} color="orange" />
+                    <Text style={tw`font-bold text-base ml-2 pr-2 shadow text-yellow-600`}>Back</Text>
                 </RippleButton>
 
                 {/* Image Slider */}
@@ -216,8 +219,8 @@ export default function ProductDetail({ route, navigation }) {
                         <Text style={tw`font-bold text-gray-600 pr-2`}>In Stock</Text>
                     </View>
                     {/* <View style={tw`border-b-2 border-gray-300 pb-2 `} /> */}
-
-                    <View style={tw`flex flex-row justify-between pt-2 `}>
+                    <Divider style={tw`my-2`} />
+                    <View style={tw`flex flex-row justify-between items-center pt-2 `}>
                         <View style={tw` flex flex-col`}>
                             <Text style={tw`font-bold text-xl text-gray-600 `}>Rs. {price}</Text>
                             <View style={tw` flex flex-row`}>
@@ -227,7 +230,13 @@ export default function ProductDetail({ route, navigation }) {
                                 <Text style={tw`bg-blue-200 p-1 ml-4 text-xs rounded text-blue-800 font-bold`}>{discount}% OFF</Text>
                             </View>
                         </View>
-                        <View></View>
+                        <View>
+                            <View style={tw`flex flex-row items-center`}>
+                                <IconButton icon="plus" size={18} onPress={() => handleQuantity(quantity + 1)} />
+                                <Subheading>{quantity}</Subheading>
+                                <IconButton icon="minus" size={18} onPress={() => handleQuantity(quantity - 1)} />
+                            </View>
+                        </View>
                     </View>
 
                     {/* Product Description */}
@@ -246,15 +255,13 @@ export default function ProductDetail({ route, navigation }) {
                 </ScrollView>
 
                 {/* Add to cart button */}
-                <View style={tw`w-full p-2 static `}>
-                    <TouchableOpacity
-                        onPress={handleAddToCart}
-                        style={tw`p-3 flex flex-row shadow-sm text-center bg-blue-800 rounded-lg  flex justify-center items-center`}
-                    >
-                        <Icon name="shopping-basket" size={20} color="white" />
-                        <Text style={tw`font-bold text-base ml-2 text-white shadow `}>Add To Cart</Text>
-                    </TouchableOpacity>
-                </View>
+                <RippleButton
+                    onPress={handleAddToCart}
+                    style={tw`p-3 m-2 flex flex-row shadow-sm text-center bg-blue-800 rounded-lg  flex justify-center items-center`}
+                >
+                    <Icon name="shopping-basket" size={20} color="white" />
+                    <Text style={tw`font-bold text-base ml-2 text-white shadow `}>Add To Cart</Text>
+                </RippleButton>
             </SafeAreaView>
         );
     }
