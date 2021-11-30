@@ -1,13 +1,15 @@
 import React from "react";
-import { View, Text, ScrollView, ImageBackground, StyleSheet, FlatList, Image, TouchableOpacity, Button } from "react-native";
+import { View, ScrollView } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import Carousel from "../../components/CustomCarosel/Carousel";
 import CustomFlatList from "../../components/CustomFlatList";
+import Loading from "../../components/Loading";
 import ItemList from "../../components/CustomFlatList/ItemList";
 import Banner from "./Banner";
 import useFetchQuery from "../../hooks/useFetchQuery";
 import { STATUS } from "../../utils/constants";
 import response from "../response";
+
 // import CustomBottomSheet from "../../components/CustomBottomSheet";
 export default function Home() {
     const dummyData = [
@@ -44,11 +46,11 @@ export default function Home() {
     const image = { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" };
     const url = "wp-json/wc/v3/products";
 
-    const { error, isLoading, status } = useFetchQuery("latest", url);
+    // const { error, isLoading, status, response } = useFetchQuery("latest", url);
     // console.log("data", error, isLoading, status, response);
 
     // if (STATUS.loading == status) {
-    //     return <Text>Loading</Text>;
+    //     return <Loading />;
     // }
     // if (STATUS.success == status)
     return (

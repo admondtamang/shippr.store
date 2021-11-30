@@ -1,11 +1,11 @@
-import React from "react";
-import Home from "../screens/Home";
+import React, { useEffect, useState } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomNavigation from "./BottomNavigation";
 import ProductDetail from "../screens/ProductDetail";
-
+import OnBoarding from "../screens/OnBoarding";
+import Splash from "../components/Splash";
 export default function navigation() {
     return (
         <NavigationContainer>
@@ -21,8 +21,23 @@ export default function navigation() {
 const Stack = createNativeStackNavigator();
 
 function RootNavigator() {
+    const [isAppFirstLaunched, setIsAppFirstLaunched] = useState(null);
+
+    useEffect(async () => {
+        const appData = await AsyncStorage.getItem("isAppFirstLaunched");
+        if (appData == null) {
+            setIsAppFirstLaunched(true);
+            AsyncStorage.setItem("isAppFirstLaunched", "false");
+        } else {
+            setIsAppFirstLaunched(false);
+        }
+
+        // AsyncStorage.removeItem('isAppFirstLaunched');
+    }, []);
     return (
         <Stack.Navigator>
+            {isAppFirstLaunched && <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />}
+            <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
             <Stack.Screen name="Root" component={BottomNavigation} options={{ headerShown: false }} />
             <Stack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: false }} />
             {/* <Stack.Group screenOptions={{ presentation: "modal" }}>
