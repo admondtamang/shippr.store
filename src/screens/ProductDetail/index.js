@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, ScrollView, SafeAreaView, ToastAnd
 import tw from "tailwind-react-native-classnames";
 import { WIDTH } from "../../utils/screenSize";
 import HTML from "react-native-render-html";
+import Button from "../../components/Button";
 import Icon from "react-native-vector-icons/Entypo";
 import { AntDesign } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
@@ -68,23 +69,28 @@ export default function ProductDetail({ route, navigation }) {
         }
 
         return (
-            <SafeAreaView style={tw`flex h-full bg-blue`}>
+            <ScrollView style={tw`flex h-full bg-blue`}>
                 {/* Back button has absoult attribute */}
-                <RippleButton
+                <Button
                     onPress={() => navigation.goBack()}
+                    icon={<AntDesign name="leftcircle" size={24} color="orange" />}
+                    label="Back"
+                    textStyle={`font-bold text-base ml-2 pr-2 shadow text-yellow-600`}
                     style={tw`absolute top-9 left-5 p-1 rounded-full flex justify-center items-center flex-row bg-white z-50 `}
-                >
-                    <AntDesign name="leftcircle" size={24} color="orange" />
-                    <Text style={tw`font-bold text-base ml-2 pr-2 shadow text-yellow-600`}>Back</Text>
-                </RippleButton>
-
-                {/* Image Slider */}
-                <View style={tw`h-3/5 w-full`}>
+                />
+                <Button
+                    onPress={() => navigation.goBack()}
+                    icon={<AntDesign name="heart" size={20} color="orange" />}
+                    textStyle={`font-bold text-base ml-2 pr-2 shadow text-yellow-600`}
+                    style={tw`absolute top-9 right-5 p-1 rounded-full flex justify-center items-center flex-row bg-white z-50 `}
+                />
+                {/* Image Slider - 1/3 */}
+                <View style={tw`h-1/3 w-full`}>
                     <SwiperComponent images={pictures} />
                 </View>
 
                 {/* Product Detail */}
-                <ScrollView style={tw`h-full p-3 bg-white`}>
+                <View style={tw`h-full p-3 bg-white`}>
                     <RippleButton ripple={10} onPress={() => null}>
                         <Text style={tw.style(`font-bold text-lg text-gray-900 leading-7 `)}>{name}</Text>
                     </RippleButton>
@@ -113,7 +119,9 @@ export default function ProductDetail({ route, navigation }) {
                                 {on_sale && (
                                     <Text style={tw`font-bold line-through text-base text-gray-500 block`}>Rs. {regular_price}</Text>
                                 )}
-                                <Text style={tw`bg-blue-200 p-1 ml-4 text-xs rounded text-blue-800 font-bold`}>{discount}% OFF</Text>
+                                {discount >= 1 && (
+                                    <Text style={tw`bg-blue-200 p-1 ml-4 text-xs rounded text-blue-800 font-bold`}>{discount}% OFF</Text>
+                                )}
                             </View>
                         </View>
                         <View>
@@ -138,17 +146,18 @@ export default function ProductDetail({ route, navigation }) {
                         <ToggleButton icon="format-align-left" value="left" />
                         <ToggleButton icon="format-align-right" value="right" />
                     </ToggleButton.Row>
-                </ScrollView>
+                </View>
 
                 {/* Add to cart button */}
-                <RippleButton
-                    onPress={handleAddToCart}
-                    style={tw`p-3 m-2 flex flex-row shadow-sm text-center bg-blue-800 rounded-lg  flex justify-center items-center`}
-                >
-                    <Icon name="shopping-basket" size={20} color="white" />
-                    <Text style={tw`font-bold text-base ml-2 text-white shadow `}>Add To Cart</Text>
-                </RippleButton>
-            </SafeAreaView>
+                <View style={tw`p-1 w-full absolute bottom-0`}>
+                    <Button
+                        onPress={handleAddToCart}
+                        style={tw` p-3 m-2 flex flex-row shadow-sm text-center bg-blue-800 rounded-lg  flex justify-center items-center`}
+                        icon={<Icon name="shopping-basket" size={20} color="white" />}
+                        label="Add To Cart"
+                    />
+                </View>
+            </ScrollView>
         );
     }
 }

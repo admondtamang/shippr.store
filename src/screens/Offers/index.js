@@ -7,7 +7,7 @@ import tw from "tailwind-react-native-classnames";
 import Header from "../../components/Header";
 import { Feather } from "@expo/vector-icons";
 import ItemList from "../../components/CustomFlatList/ItemList";
-import response from "../response";
+// import response from "../response";
 import useFetchQuery from "../../hooks/useFetchQuery";
 
 export default function Offers() {
@@ -29,7 +29,7 @@ export default function Offers() {
     ];
     const url = "wp-json/wc/v3/products";
 
-    const { error, isLoading, status } = useFetchQuery("latest", url);
+    const { error, isLoading, status, response } = useFetchQuery("latest", url);
 
     return (
         <ScrollView style={tw`py-9 `}>
@@ -46,35 +46,37 @@ export default function Offers() {
                 />
             </View>
 
-            {/* Product FlatList */}
-            <CustomFlatList
-                title="Hot Offers"
-                icon={<Feather name="watch" size={24} color="black" />}
-                horizontal
-                data={response}
-                type={ItemList.product}
-                showViewAll
-                ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
-                twFlatListStyle={`mt-1`}
-            />
+            <View style={tw`pb-24`}>
+                {/* Product FlatList */}
+                <CustomFlatList
+                    title="Hot Offers"
+                    icon={<Feather name="watch" size={24} color="black" />}
+                    horizontal
+                    data={response}
+                    type={ItemList.product}
+                    showViewAll
+                    ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
+                    twFlatListStyle={`mt-1`}
+                />
 
-            <CustomFlatList
-                type={ItemList.product}
-                title="Hot Offers"
-                icon={<Feather name="feather" size={24} color="black" />}
-                horizontal
-                data={response}
-                ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
-            />
+                <CustomFlatList
+                    type={ItemList.product}
+                    title="Hot Offers"
+                    icon={<Feather name="feather" size={24} color="black" />}
+                    horizontal
+                    data={response}
+                    ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
+                />
 
-            <CustomFlatList
-                title="Hot Offers"
-                type={ItemList.product}
-                icon={<Feather name="heart" size={24} color="black" />}
-                horizontal
-                data={response}
-                ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
-            />
+                <CustomFlatList
+                    title="Hot Offers"
+                    type={ItemList.product}
+                    icon={<Feather name="heart" size={24} color="black" />}
+                    horizontal
+                    data={response}
+                    ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
+                />
+            </View>
         </ScrollView>
     );
 }
