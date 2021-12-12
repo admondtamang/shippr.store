@@ -8,7 +8,7 @@ import ItemList from "../../components/CustomFlatList/ItemList";
 import Banner from "./Banner";
 import useFetchQuery from "../../hooks/useFetchQuery";
 import { STATUS } from "../../utils/constants";
-import response from "../response";
+// import response from "../response";
 
 // import CustomBottomSheet from "../../components/CustomBottomSheet";
 export default function Home() {
@@ -46,37 +46,37 @@ export default function Home() {
     const image = { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" };
     const url = "wp-json/wc/v3/products";
 
-    // const { error, isLoading, status, response } = useFetchQuery("latest", url);
+    const { error, isLoading, status, response } = useFetchQuery("latest", url);
     // console.log("data", error, isLoading, status, response);
 
-    // if (STATUS.loading == status) {
-    //     return <Loading />;
-    // }
-    // if (STATUS.success == status)
-    return (
-        <ScrollView nestedScrollEnabled={true} style={tw`flex pb-5`}>
-            {/* banner */}
-            <Banner />
-            {/* <CustomBottomSheet /> */}
+    if (STATUS.loading == status) {
+        return <Loading />;
+    }
+    if (STATUS.success == status)
+        return (
+            <ScrollView nestedScrollEnabled={true} style={tw`flex pb-5`}>
+                {/* banner */}
+                <Banner />
+                {/* <CustomBottomSheet /> */}
 
-            {/* Categories */}
-            <CustomFlatList data={data} type={ItemList.category} title="Explore" numColumns={4} />
+                {/* Categories */}
+                <CustomFlatList data={data} type={ItemList.category} title="Explore" numColumns={4} />
 
-            {/* Featured Products */}
-            <CustomFlatList data={response} type={ItemList.product} title="Featured" numColumns={2} />
+                {/* Featured Products */}
+                <CustomFlatList data={response} type={ItemList.product} title="Featured" numColumns={2} />
 
-            {/* Carousel */}
-            <Carousel data={dummyData} />
+                {/* Carousel */}
+                <Carousel data={dummyData} />
 
-            <CustomFlatList
-                title="Featured"
-                horizontal
-                data={response}
-                type={ItemList.product}
-                ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
-                showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-            />
-        </ScrollView>
-    );
+                <CustomFlatList
+                    title="Featured"
+                    horizontal
+                    data={response}
+                    type={ItemList.product}
+                    ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
+            </ScrollView>
+        );
 }

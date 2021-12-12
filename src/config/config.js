@@ -1,5 +1,5 @@
 const baseURL = "https://shippr.store/";
-const consumerKey = "ck_6a39757f13d68aac8da0598cc68f3819e87771de";
-const consumerSecret = "cs_e12135992fb68d42d0d7897ed42bbb556c440194";
+const consumerKey = "ck_7f3603390fcd4961f51e367d8f9415882ab28bea";
+const consumerSecret = "cs_49b0caba433639f3cf0ffda7a7d88bc1f4723569";
 
 export { baseURL, consumerKey, consumerSecret };

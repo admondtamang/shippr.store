@@ -14,12 +14,20 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import store from "./src/redux/configureStore";
 import Toast from "react-native-toast-message";
 import { useFonts } from "expo-font";
+import { decode, encode } from "base-64";
 
 export default function App() {
     LogBox.ignoreAllLogs(true);
     const queryClient = new QueryClient();
     let persistor = persistStore(store);
 
+    if (!global.btoa) {
+        global.btoa = encode;
+    }
+
+    if (!global.atob) {
+        global.atob = decode;
+    }
     const [loaded] = useFonts({
         Montserrat: require("./assets/fonts/Montserrat-Bold.ttf"),
     });
