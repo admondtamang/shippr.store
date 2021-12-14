@@ -5,6 +5,7 @@ import Carousel from "../../components/CustomCarosel/Carousel";
 import CustomFlatList from "../../components/CustomFlatList";
 import Loading from "../../components/Loading";
 import ItemList from "../../components/CustomFlatList/ItemList";
+import { Feather } from "@expo/vector-icons";
 import Banner from "./Banner";
 import useFetchQuery from "../../hooks/useFetchQuery";
 import { STATUS } from "../../utils/constants";
@@ -60,15 +61,24 @@ export default function Home() {
                 {/* <CustomBottomSheet /> */}
 
                 {/* Categories */}
-                <CustomFlatList data={data} type={ItemList.category} title="Explore" numColumns={4} />
+                <CustomFlatList showViewAll data={data} type={ItemList.category} title="Explore" numColumns={4} />
 
                 {/* Featured Products */}
-                <CustomFlatList data={response} type={ItemList.product} title="Featured" numColumns={2} />
+                <CustomFlatList
+                    icon={<Feather name="watch" size={24} color="black" />}
+                    showViewAll
+                    data={response}
+                    type={ItemList.product}
+                    title="Featured"
+                    numColumns={2}
+                />
 
                 {/* Carousel */}
                 <Carousel data={dummyData} />
 
                 <CustomFlatList
+                    icon={<Feather name="watch" size={24} color="black" />}
+                    showViewAll
                     title="Featured"
                     horizontal
                     data={response}

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import { productItem, categoryItem, categoryRoundedItem } from "./Items";
+import { productItem, categoryItem, categoryRoundedItem, small_productItem } from "./Items";
 import list from "./ItemList";
 import RippleButton from "../RippleButton";
 
@@ -29,6 +29,8 @@ export default function CustomFlatList({
                 return categoryItem(item);
             case list.product:
                 return productItem(item);
+            case list.small_product:
+                return small_productItem(item);
             case list.categoryRounded:
                 return categoryRoundedItem(item);
             default:

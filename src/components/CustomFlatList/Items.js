@@ -20,6 +20,11 @@ const productItem = ({ item }) => {
     return <Product item={item} />;
 };
 
+// Product item
+const small_productItem = ({ item }) => {
+    return <Product item={item} small={true} />;
+};
+
 // Offer screen item
 const categoryRoundedItem = ({ item }) => (
     <RippleButton style={tw`ml-2`} onPress={() => null}>
@@ -29,4 +34,4 @@ const categoryRoundedItem = ({ item }) => (
         <Text style={tw`text-center text-black mt-1 capitalize tracking-wide w-full`}>{item.name}</Text>
     </RippleButton>
 );
-export { productItem, categoryItem, categoryRoundedItem };
+export { productItem, categoryItem, categoryRoundedItem, small_productItem };

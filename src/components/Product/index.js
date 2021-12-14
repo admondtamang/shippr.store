@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { Badge, Surface, TouchableRipple } from "@admond/react-native-paper";
 import RippleButton from "../RippleButton";
 
-export default function Product({ item }) {
+export default function Product({ item, small }) {
     const navigation = useNavigation();
 
     var discount;
@@ -50,14 +50,14 @@ export default function Product({ item }) {
         right: 5;
     `;
 
-    return (
-        <Container onPress={onPress} style={tw`rounded mr-2`}>
-            <>
+    if (small)
+        return (
+            <RippleButton onPress={onPress} style={tw`rounded w-36  mr-2`}>
                 <Image
                     source={{
                         uri: images?.length > 0 ? images[0]?.src : image,
                     }}
-                    style={tw`w-full h-48 rounded-lg`}
+                    style={tw`w-full h-36 rounded-lg`}
                 />
 
                 <Text numberOfLines={1} style={tw`w-full my-1 text-sm mt-3`}>
@@ -69,7 +69,27 @@ export default function Product({ item }) {
                     {on_sale && <Text style={tw`line-through text-sm text-red-300 pl-2`}>{regular_price}</Text>}
                 </Text>
                 {discount != 0 && <StyledBadge>-{discount}%</StyledBadge>}
-            </>
+            </RippleButton>
+        );
+
+    return (
+        <Container onPress={onPress} style={tw`rounded mr-2`}>
+            <Image
+                source={{
+                    uri: images?.length > 0 ? images[0]?.src : image,
+                }}
+                style={tw`w-full h-48 rounded-lg`}
+            />
+
+            <Text numberOfLines={1} style={tw`w-full my-1 text-sm mt-3`}>
+                {name}
+            </Text>
+            <Text style={tw`font-bold text-lg w-full`}>
+                <Text style={tw`font-bold text-sm text-gray-500`}>NRS.</Text>
+                {price}
+                {on_sale && <Text style={tw`line-through text-sm text-red-300 pl-2`}>{regular_price}</Text>}
+            </Text>
+            {discount != 0 && <StyledBadge>-{discount}%</StyledBadge>}
         </Container>
     );
 }

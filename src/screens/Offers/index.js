@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useLayoutEffect } from "react";
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomFlatList from "../../components/CustomFlatList";
 import tw from "tailwind-react-native-classnames";
 import Header from "../../components/Header";
@@ -53,25 +52,29 @@ export default function Offers() {
                     icon={<Feather name="watch" size={24} color="black" />}
                     horizontal
                     data={response}
-                    type={ItemList.product}
+                    type={ItemList.small_product}
                     showViewAll
                     ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
-                    twFlatListStyle={`mt-1`}
+                    twFlatListStyle={`mt-1 mb-2`}
                 />
 
                 <CustomFlatList
-                    type={ItemList.product}
+                    type={ItemList.small_product}
                     title="Hot Offers"
                     icon={<Feather name="feather" size={24} color="black" />}
                     horizontal
+                    twFlatListStyle={`mt-1 mb-2`}
+                    showViewAll
                     data={response}
                     ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
                 />
 
                 <CustomFlatList
+                    twFlatListStyle={`mt-1 mb-2`}
                     title="Hot Offers"
-                    type={ItemList.product}
+                    type={ItemList.small_product}
                     icon={<Feather name="heart" size={24} color="black" />}
+                    showViewAll
                     horizontal
                     data={response}
                     ItemSeparatorComponent={() => <View style={{ width: 4 }} />}
