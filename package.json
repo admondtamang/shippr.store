@@ -22,6 +22,7 @@
         "expo-blur": "^10.0.3",
         "expo-font": "~10.0.3",
         "expo-status-bar": "~1.1.0",
+        "formik": "^2.2.9",
         "jwt-decode": "^3.1.2",
         "lottie-react-native": "^5.0.1",
         "react": "17.0.1",
@@ -44,7 +45,8 @@
         "reselect": "^4.1.2",
         "styled-components": "^5.3.3",
         "tailwind-react-native-classnames": "^1.5.1",
-        "tailwind-rn": "^3.0.1"
+        "tailwind-rn": "^3.0.1",
+        "yup": "^0.32.11"
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",

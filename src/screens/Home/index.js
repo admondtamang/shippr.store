@@ -8,11 +8,16 @@ import ItemList from "../../components/CustomFlatList/ItemList";
 import { Feather } from "@expo/vector-icons";
 import Banner from "./Banner";
 import useFetchQuery from "../../hooks/useFetchQuery";
-import { STATUS } from "../../utils/constants";
+import { PRODUCTS, STATUS } from "../../utils/constants";
+import CategoriesHome from "./CategoriesHome";
+import { useNavigation } from "@react-navigation/native";
+
 // import response from "../response";
 
 // import CustomBottomSheet from "../../components/CustomBottomSheet";
 export default function Home() {
+    const navigation = useNavigation();
+
     const dummyData = [
         {
             title: "Classic Black Guitar",
@@ -33,26 +38,16 @@ export default function Home() {
             id: 3,
         },
     ];
-    const data = [
-        { id: 1, name: "beer", image: require("../../../assets/icons/beer.png") },
-        { id: 1, name: "music", image: require("../../../assets/icons/music.png") },
-        { id: 1, name: "Gadget", image: require("../../../assets/icons/electronic.png") },
-        { id: 1, name: "food", image: require("../../../assets/icons/food.png") },
-        { id: 1, name: "beer", image: require("../../../assets/icons/beer.png") },
-        { id: 1, name: "music", image: require("../../../assets/icons/music.png") },
-        { id: 1, name: "Gadget", image: require("../../../assets/icons/electronic.png") },
-        { id: 1, name: "food", image: require("../../../assets/icons/food.png") },
-    ];
 
-    const image = { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" };
-    const url = "wp-json/wc/v3/products";
+    // const image = { uri: "https://i.pinimg.com/originals/a1/78/55/a1785592d41e140f00ef1cf3d9597dcb.png" };
 
-    const { error, isLoading, status, response } = useFetchQuery("latest", url);
+    const { error, isLoading, status, response } = useFetchQuery("latest", PRODUCTS);
     // console.log("data", error, isLoading, status, response);
 
     if (STATUS.loading == status) {
         return <Loading />;
     }
+
     if (STATUS.success == status)
         return (
             <ScrollView nestedScrollEnabled={true} style={tw`flex pb-5`}>
@@ -61,7 +56,7 @@ export default function Home() {
                 {/* <CustomBottomSheet /> */}
 
                 {/* Categories */}
-                <CustomFlatList showViewAll data={data} type={ItemList.category} title="Explore" numColumns={4} />
+                <CategoriesHome />
 
                 {/* Featured Products */}
                 <CustomFlatList
@@ -76,6 +71,7 @@ export default function Home() {
                 {/* Carousel */}
                 <Carousel data={dummyData} />
 
+                {/* Featured Products */}
                 <CustomFlatList
                     icon={<Feather name="watch" size={24} color="black" />}
                     showViewAll

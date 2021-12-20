@@ -4,6 +4,7 @@ import tw from "tailwind-react-native-classnames";
 import { productItem, categoryItem, categoryRoundedItem, small_productItem } from "./Items";
 import list from "./ItemList";
 import RippleButton from "../RippleButton";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CustomFlatList({
     data,
@@ -18,6 +19,8 @@ export default function CustomFlatList({
     horizontal,
     ...rest
 }) {
+    const navigation = useNavigation();
+
     /**
      *
      * @param {*} item renderitem default params from ListView
@@ -26,20 +29,20 @@ export default function CustomFlatList({
     const handleRenderItem = (item) => {
         switch (type) {
             case list.category:
-                return categoryItem(item);
+                return categoryItem(item, navigation);
             case list.product:
-                return productItem(item);
+                return productItem(item, navigation);
             case list.small_product:
-                return small_productItem(item);
+                return small_productItem(item, navigation);
             case list.categoryRounded:
-                return categoryRoundedItem(item);
+                return categoryRoundedItem(item, navigation);
             default:
                 return renderItem;
         }
     };
 
     /**
-     * header for FlatList
+     * Header for FlatList
      */
     const flatListHeader = (
         <View style={tw`flex flex-row justify-between items-center pb-2 `}>
@@ -50,7 +53,7 @@ export default function CustomFlatList({
 
             {showViewAll && (
                 <RippleButton onPress={() => null}>
-                    <Text style={tw`font-bold mr-3 p-2 rounded-lg bg-gray-300`}>More</Text>
+                    <Text style={tw`font-bold mr-3 p-2 rounded-lg bg-gray-200`}>More</Text>
                 </RippleButton>
             )}
         </View>

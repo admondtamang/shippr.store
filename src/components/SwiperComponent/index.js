@@ -30,7 +30,7 @@ export default function SwiperComponent({ images }) {
                     <RippleButton key={index} style={styles.slide} onPress={() => setIsVisible(true)}>
                         <ImageBackground
                             resizeMode="cover"
-                            style={tw`aspect-square h-full w-full`}
+                            style={tw`h-full w-full`}
                             PlaceholderContent={<ActivityIndicator />}
                             source={{ uri: item.uri }}
                         />

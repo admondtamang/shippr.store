@@ -17,9 +17,10 @@ import Toast from "react-native-toast-message";
 import { Divider, IconButton, Subheading, ToggleButton, TouchableRipple } from "@admond/react-native-paper";
 import RippleButton from "../../components/RippleButton";
 import Loading from "../../components/Loading";
+import { PRODUCTS } from "../../utils/constants";
 export default function ProductDetail({ route, navigation }) {
     const slug = route.params.slug;
-    let url = "/wp-json/wc/v3/products?slug=" + slug;
+    let url = PRODUCTS + "?slug=" + slug;
     let discount;
     const [value, setValue] = React.useState("left");
     const [quantity, setQuantity] = useState(1);
@@ -47,15 +48,15 @@ export default function ProductDetail({ route, navigation }) {
 
     if (response) {
         const { id, price, variations, name, on_sale, description, regular_price, images } = response[0];
-        const pictures =
-            [] ||
-            images?.map((img) => {
-                return { uri: img.src };
-            });
+        const pictures = images?.map((img) => {
+            return { uri: img.src };
+        });
+
         if (regular_price) {
             discount = ((regular_price - price) / regular_price) * 100;
             discount = discount.toFixed(0);
         }
+
         // image validation choosing 1st image
         const image = images.length <= 0 ? "https://facebook.github.io/react/img/logo_small.png" : images[0].src;
 
@@ -68,6 +69,7 @@ export default function ProductDetail({ route, navigation }) {
             });
             ToastAndroid.showWithGravity("Product added to cart", ToastAndroid.SHORT, ToastAndroid.CENTER);
         }
+
         function handleQuantity(value) {
             if (value < 1) setQuantity(1);
             else setQuantity(value);
@@ -76,7 +78,7 @@ export default function ProductDetail({ route, navigation }) {
         return (
             <>
                 <Animated.ScrollView
-                    style={tw`flex h-full bg-blue`}
+                    style={tw`flex h-full`}
                     scrollEventThrottle={1}
                     onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: false })}
                 >
@@ -94,14 +96,18 @@ export default function ProductDetail({ route, navigation }) {
                         textStyle={`font-bold text-base ml-2 pr-2 shadow text-yellow-600`}
                         style={tw`absolute top-9 right-5 p-1 rounded-full flex justify-center items-center flex-row bg-white z-50 `}
                     />
+
                     {/* Image Slider - 1/3 */}
                     {pictures.length > 0 ? (
                         <View style={tw`h-1/3 w-full`}>
                             <SwiperComponent images={pictures} />
                         </View>
                     ) : (
-                        <LottieFile animationData={animationData} message="No picture found" />
+                        <View style={tw`h-1/3 w-full`}>
+                            <LottieFile animationData={animationData} message="No picture found" />
+                        </View>
                     )}
+
                     {/* Product Detail */}
                     <View style={tw`h-full p-3 bg-white`}>
                         <RippleButton ripple={10} onPress={() => null}>
@@ -120,12 +126,12 @@ export default function ProductDetail({ route, navigation }) {
                                 </View>
                                 <Text style={tw`font-bold`}>(20 reviews)</Text>
                             </View>
-
-                            <Text style={tw`font-bold text-gray-600 pr-2`}>In Stock</Text>
+                            <Text style={tw`font-bold text-gray-400 pr-2 text-sm`}>In Stock</Text>
                         </View>
+
                         {/* <View style={tw`border-b-2 border-gray-300 pb-2 `} /> */}
                         <Divider style={tw`my-2`} />
-                        <View style={tw`flex flex-row justify-between items-center pt-2 `}>
+                        <View style={tw`flex flex-row justify-between items-center`}>
                             <View style={tw` flex flex-col`}>
                                 <Text style={tw`font-bold text-xl text-gray-600 `}>Rs. {price}</Text>
                                 <View style={tw` flex flex-row`}>

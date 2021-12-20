@@ -1,14 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomFlatList from "../../components/CustomFlatList";
-import ItemList from "../../components/CustomFlatList/ItemList";
 import PaginatedFlatList from "../../components/PaginatedFlatList";
-import response from "../response";
-export default function CategoryDetail() {
+
+export default function CategoryDetail({ route }) {
+    // const { error, isLoading, status, response } = useFetchQuery(CATEGORIES, CATEGORIES);
+    const slug = route?.params?.id || 65;
+
     return (
         <SafeAreaView>
-            <PaginatedFlatList />
+            <PaginatedFlatList slug={slug} />
         </SafeAreaView>
     );
 }

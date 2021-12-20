@@ -5,9 +5,9 @@ import Product from "../Product";
 import RippleButton from "../RippleButton";
 
 // home screen item
-const categoryItem = ({ item }) => (
+const categoryItem = ({ item }, navigation) => (
     <RippleButton
-        onPress={() => null}
+        onPress={() => navigation.navigate("CategoryDetail", item)}
         style={tw`flex flex-col flex-grow drop-shadow-lg p-2 py-3 m-2 justify-center items-center shadow  bg-gray-200 rounded-lg`}
     >
         <Image source={item.image} style={{ width: 30, height: 30 }} />
@@ -26,8 +26,8 @@ const small_productItem = ({ item }) => {
 };
 
 // Offer screen item
-const categoryRoundedItem = ({ item }) => (
-    <RippleButton style={tw`ml-2`} onPress={() => null}>
+const categoryRoundedItem = ({ item }, navigation) => (
+    <RippleButton style={tw`ml-2`} onPress={() => navigation("Category")}>
         <View style={tw`flex flex-col flex-grow  p-4 justify-center items-center bg-gray-200 shadow-md rounded-full`}>
             <Image source={item.image} style={{ width: 30, height: 30 }} />
         </View>

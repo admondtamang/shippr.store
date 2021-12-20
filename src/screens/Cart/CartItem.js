@@ -6,9 +6,11 @@ import { DECREASE_CART, INCREASE_CART, REMOVE_FROM_CART } from "../../redux/cart
 import { useDispatch } from "react-redux";
 import RippleButton from "../../components/RippleButton";
 import tw from "tailwind-react-native-classnames";
+import { useNavigation } from "@react-navigation/native";
 export default function CartItem({ item }) {
     let discount;
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     if (item.regular_price) {
         discount = ((regular_price - item.price) / regular_price) * 100;
         discount = discount.toFixed(0);
@@ -22,7 +24,15 @@ export default function CartItem({ item }) {
         // });
     }
     return (
-        <RippleButton onPress={() => null} style={tw`flex bg-white p-2 flex-row justify-between rounded mt-4`}>
+        <RippleButton
+            onPress={
+                () => null
+                // navigation.navigate("ProductDetail", {
+                //     slug: item.slug,
+                // })
+            }
+            style={tw`flex bg-white p-2 flex-row justify-between rounded mt-4`}
+        >
             <Image source={{ uri: item?.images[0]?.src }} style={tw`w-2/6 rounded`} />
             <Description>
                 <Text numberOfLines={2} style={tw`font-bold w-2/5`} onPress={() => {}}>

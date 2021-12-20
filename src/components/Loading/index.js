@@ -19,7 +19,7 @@ export default class Loading extends React.Component {
     }
 
     render() {
-        const colorLayer = this.state.animationDone ? null : <View style={[StyleSheet.absoluteFill, { backgroundColor: "#1da1f2" }]} />;
+        const colorLayer = this.state.animationDone ? null : <View style={[StyleSheet.absoluteFill, { backgroundColor: "#fff" }]} />;
 
         const whiteLayer = this.state.animationDone ? null : <View style={[StyleSheet.absoluteFill, { backgroundColor: "#fff" }]} />;
 

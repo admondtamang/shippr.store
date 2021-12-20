@@ -5,28 +5,32 @@ import { Button } from "@admond/react-native-paper";
 import axiosInstance from "../../utils/axios";
 import CustomFlatList from "../CustomFlatList";
 import ItemList from "../CustomFlatList/ItemList";
+import { CATEGORIES, PRODUCTS } from "../../utils/constants";
 
-export default function PaginatedFlatList() {
+export default function PaginatedFlatList({ slug }) {
     const numColumns = 2;
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [response, setResponse] = useState([]);
-    const url = `wp-json/wc/v3/products?page=` + page + "&orderby=popularity";
-    const offset = 5;
+    const url = PRODUCTS + `?category=` + slug + `&page=` + page;
+    console.log(url);
+    let oldSlug;
 
-    useEffect(() => getData(), [page]);
+    useEffect(() => getData(), [page, slug]);
 
     const getData = () => {
         setLoading(true);
+        oldSlug != slug && setResponse([]);
+        console.log(oldSlug, slug);
         axiosInstance(url)
             .then((res) => {
                 setResponse([...response, ...res.data]);
-                setLoading(false);
             })
             .catch((error) => {
-                setLoading(false);
                 console.error(error);
             });
+        oldSlug = slug;
+        setLoading(false);
     };
 
     // Add empty colum at the end of row
