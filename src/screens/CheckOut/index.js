@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCartTotal } from "../../redux/cart/cartSelector";
 import { EMPTY_CART } from "../../redux/cart/cartSlice";
 import tw from "tailwind-react-native-classnames";
+import OrderSummary from "./OrderSummary";
 
 // import { postPlaceOrder } from "../../api/checkout";
 
@@ -63,26 +64,6 @@ export default function CheckOutScreen({ navigation }) {
         }
     };
 
-    function renderSummaryRow(name, data) {
-        if (name == "Total") {
-            return (
-                <>
-                    <View style={tw`h-1 bg-gray-200 my-2`} />
-                    <View style={tw`flex  flex-row justify-between `}>
-                        <Text style={tw`text-lg text-gray-900 font-bold`}>{name}</Text>
-                        <Text style={tw`text-lg text-gray-900 font-bold`}>{data}</Text>
-                    </View>
-                </>
-            );
-        } else
-            return (
-                <View style={tw`flex  flex-row justify-between `}>
-                    <Text style={tw`text-lg text-gray-600 font-bold`}>{name}</Text>
-                    <Text style={tw`text-lg text-gray-600 font-bold`}>{data}</Text>
-                </View>
-            );
-    }
-
     return (
         <View style={tw`flex h-full`}>
             <Formik
@@ -92,9 +73,9 @@ export default function CheckOutScreen({ navigation }) {
             >
                 {(formikProps) => (
                     <>
-                        <ScrollView>
+                        <ScrollView style={tw` flex m-3`}>
                             {/* Form Fields */}
-                            <View style={tw`flex bg-white p-4 m-3 rounded-lg font-bold`}>
+                            <View style={tw`flex bg-white p-4 mb-3 rounded-lg font-bold`}>
                                 <Text style={tw`text-xl font-bold mb-4`}>User Detail</Text>
 
                                 <StyledInput label="Full Name" formikProps={formikProps} formikKey="first_name" placeholder="Full Name" />
@@ -117,12 +98,8 @@ export default function CheckOutScreen({ navigation }) {
                             </View>
 
                             {/* Order Summary */}
-                            <View style={tw`flex bg-white p-4 m-3 rounded-lg font-bold`}>
-                                <Text style={tw`text-xl font-bold mb-4`}>Checkout Summary</Text>
-                                {renderSummaryRow("Order", selectCartTotal)}
-                                {renderSummaryRow("Delivery", deliveryCharge)}
-                                {renderSummaryRow("Total", deliveryCharge)}
-                            </View>
+                            <OrderSummary />
+
                             {/* <pre>{JSON.stringify(formikProps, null, 2)}</pre> */}
                             {/* <Text>{JSON.stringify(formikProps, null, 2)}</Text> */}
                         </ScrollView>

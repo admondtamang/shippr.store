@@ -5,12 +5,11 @@ import CartItem from "./CartItem";
 import { Button, FlatList, Text } from "react-native";
 import { Searchbar } from "@admond/react-native-paper";
 import FullHeightWithButton from "../../components/Containers/FullHeightWithButton";
+import OrderSummary from "../CheckOut/OrderSummary";
 
 export default function Cart({ navigation }) {
     const [count, setCount] = React.useState(0);
     const [searchQuery, setSearchQuery] = React.useState("");
-
-    const onChangeSearch = (query) => setSearchQuery(query);
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -18,7 +17,9 @@ export default function Cart({ navigation }) {
         });
     }, [navigation]);
 
-    const cartItems = useSelector((state) => state.cart.cartItems);
+    let cartItems = useSelector((state) => state.cart.cartItems);
+
+    const onChangeSearch = (query) => setSearchQuery(query);
 
     const renderItem = ({ item }) => <CartItem item={item} />;
 
@@ -37,6 +38,7 @@ export default function Cart({ navigation }) {
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={renderItem}
                     />
+                    <OrderSummary />
                 </FullHeightWithButton>
             )}
         </SafeAreaView>
