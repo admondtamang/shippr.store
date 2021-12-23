@@ -10,6 +10,7 @@ import { selectCartTotal } from "../../redux/cart/cartSelector";
 import { EMPTY_CART } from "../../redux/cart/cartSlice";
 import tw from "tailwind-react-native-classnames";
 import OrderSummary from "./OrderSummary";
+import { postPlaceOrder } from "../../api/checkout";
 
 // import { postPlaceOrder } from "../../api/checkout";
 
@@ -53,10 +54,9 @@ export default function CheckOutScreen({ navigation }) {
                 ],
             };
 
-            // await postPlaceOrder(order);
+            await postPlaceOrder(order);
             dispatch(EMPTY_CART());
 
-            // dispatch(EMPTY_CART());
             navigation.navigate("OrderPlaced");
         } catch (error) {
             console.log(error);

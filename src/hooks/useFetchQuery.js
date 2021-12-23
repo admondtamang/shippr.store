@@ -16,7 +16,7 @@ const useFetchQuery = (queryName, url, options) => {
             .then((res) => res.data)
             .catch((error) => console.log(error))
     );
-
+    console.log(url);
     useEffect(() => {}, [url, status]);
 
     return {

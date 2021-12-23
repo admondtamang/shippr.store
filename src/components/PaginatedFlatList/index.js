@@ -64,7 +64,7 @@ export default function PaginatedFlatList({ slug }) {
     };
 
     const renderFooter = () => (
-        <Button style={{ marginBottom: 40 }} icon="more" mode="text" onPress={loadMoreData} loading={loading}>
+        <Button style={{ marginBottom: 5 }} icon="more" mode="text" onPress={loadMoreData} loading={loading}>
             Load More
         </Button>
     );

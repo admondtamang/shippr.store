@@ -13,6 +13,7 @@ import { Dimensions, View, Animated, TouchableOpacity } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { useRef } from "react";
 import { BlurView } from "expo-blur";
+import Search from "../screens/Search";
 // import Animated from "react-native-reanimated";
 
 const Tab = createBottomTabNavigator();
@@ -118,11 +119,11 @@ const BottomNavigation = () => {
                     })}
                 />
                 <Tab.Screen
-                    name="CategoryDetail"
-                    component={CategoryDetail}
+                    name="Search"
+                    component={Search}
                     options={{
                         headerShown: false,
-                        tabBarLabel: "Detail",
+                        tabBarLabel: "Search",
                         tabBarIcon: ({ color, focused, size }) => (
                             <Icon name="magnifying-glass" containerStyle={{ marginTop: focused ? 18 : 6 }} color={color} size={size} />
                         ),

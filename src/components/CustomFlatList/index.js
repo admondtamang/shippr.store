@@ -60,7 +60,7 @@ export default function CustomFlatList({
     );
 
     return (
-        <View style={tw`${horizontal ? "ml-3" : "m-3"} `}>
+        <View style={tw`${horizontal ? "ml-3" : "m-1"} `}>
             {title && flatListHeader}
             <FlatList
                 data={data}

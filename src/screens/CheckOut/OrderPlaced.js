@@ -1,8 +1,8 @@
 import React from "react";
 import LottieFile from "../../components/LottieFile";
-import data from "../../../assets/lottie/order-placed.json";
-import SafeAreaContainer from "../../components/SafeAreaContainer";
-import { Button } from "react-native-paper";
+import data from "../../assets/lottie/order-placed.json";
+import SafeAreaContainer from "../../components/Containers/SafeContainer";
+import { Button } from "@admond/react-native-paper";
 export default function OrderPlaced({ navigation }) {
     return (
         <SafeAreaContainer>

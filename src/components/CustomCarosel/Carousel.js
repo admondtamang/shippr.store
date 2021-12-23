@@ -22,7 +22,7 @@ function infiniteScroll(dataList) {
     // }, 3000);
 }
 
-const Carousel = ({ data }) => {
+const Carousel = ({ data, noDot, ...rest }) => {
     const scrollX = new Animated.Value(0);
     let position = Animated.divide(scrollX, customWidth);
     const [dataList, setDataList] = useState(data);
@@ -34,7 +34,7 @@ const Carousel = ({ data }) => {
 
     if (data && data.length) {
         return (
-            <View>
+            <View {...rest}>
                 <FlatList
                     data={data}
                     ref={(flatList) => {
@@ -53,27 +53,28 @@ const Carousel = ({ data }) => {
                     }}
                     onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }])}
                 />
-
-                <View style={styles.dotView}>
-                    {data.map((_, i) => {
-                        let opacity = position.interpolate({
-                            inputRange: [i - 1, i, i + 1],
-                            outputRange: [0.3, 1, 0.3],
-                            extrapolate: "clamp",
-                        });
-                        return (
-                            <Animated.View
-                                key={i}
-                                style={{ opacity, height: 10, width: 10, backgroundColor: "#595959", margin: 8, borderRadius: 5 }}
-                            />
-                        );
-                    })}
-                </View>
+                {!noDot == undefined ||
+                    (!noDot && (
+                        <View style={styles.dotView}>
+                            {data.map((_, i) => {
+                                let opacity = position.interpolate({
+                                    inputRange: [i - 1, i, i + 1],
+                                    outputRange: [0.3, 1, 0.3],
+                                    extrapolate: "clamp",
+                                });
+                                return (
+                                    <Animated.View
+                                        key={i}
+                                        style={{ opacity, height: 10, width: 10, backgroundColor: "#595959", margin: 8, borderRadius: 5 }}
+                                    />
+                                );
+                            })}
+                        </View>
+                    ))}
             </View>
         );
     }
 
-    console.log("Please provide Images");
     return null;
 };
 

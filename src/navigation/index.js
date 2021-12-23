@@ -9,6 +9,7 @@ import Splash from "../components/Splash";
 import CheckOutScreen from "../screens/CheckOut";
 import CategoryDetail from "../screens/CategoryDetail";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import OrderPlaced from "../screens/CheckOut/OrderPlaced";
 
 export default function navigation() {
     return (
@@ -47,8 +48,9 @@ function RootNavigator() {
             <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
             <Stack.Screen name="Root" component={BottomNavigation} options={{ headerShown: false }} />
             <Stack.Screen name="ProductDetail" component={ProductDetail} options={{ headerShown: false }} />
-            <Stack.Screen name="CategoryDetail" component={CategoryDetail} />
+            <Stack.Screen name="CategoryDetail" component={CategoryDetail} options={{ headerShown: false }} />
             <Stack.Screen name="Checkout" component={CheckOutScreen} />
+            <Stack.Screen name="OrderPlaced" component={OrderPlaced} />
 
             {/* <Stack.Group screenOptions={{ presentation: "modal" }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />

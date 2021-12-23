@@ -4,8 +4,6 @@ import { LogBox } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 
-import { Provider as PaperProvider } from "@admond/react-native-paper";
-
 import { PersistGate } from "redux-persist/integration/react";
 import Navigation from "./src/navigation";
 
@@ -15,6 +13,8 @@ import store from "./src/redux/configureStore";
 import Toast from "react-native-toast-message";
 import { useFonts } from "expo-font";
 import { decode, encode } from "base-64";
+
+import { DefaultTheme, Provider as PaperProvider } from "@admond/react-native-paper";
 
 export default function App() {
     LogBox.ignoreAllLogs(true);
@@ -36,11 +36,21 @@ export default function App() {
         return null;
     }
 
+    const theme = {
+        ...DefaultTheme,
+        roundness: 50,
+        colors: {
+            ...DefaultTheme.colors,
+            primary: "#3498db",
+            accent: "#f1c40f",
+        },
+    };
+
     return (
         <QueryClientProvider client={queryClient}>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <PaperProvider>
+                    <PaperProvider theme={theme}>
                         <SafeAreaProvider>
                             <Toast />
                             <StatusBar style={"dark"} />
