@@ -11,7 +11,7 @@ const CarouselItem = ({ item }) => {
 
     return (
         <View style={styles.cardView}>
-            <RippleButton onPress={() => navigation("CategoryDetail", item)}>
+            <RippleButton onPress={() => navigation.navigate("CategoryDetail", item)}>
                 <Image style={styles.image} source={{ uri: item.url }} />
             </RippleButton>
             <View style={styles.textView}>

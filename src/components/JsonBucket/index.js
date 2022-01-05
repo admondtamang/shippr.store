@@ -63,9 +63,7 @@ export default function JsonBucket({ data }) {
                             />
                         );
 
-                        {
-                            /* Category FLatlist */
-                        }
+                    /* Category FLatlist */
                     case jsonType.rounded_category:
                         return (
                             <CustomFlatList
@@ -80,8 +78,8 @@ export default function JsonBucket({ data }) {
                             />
                         );
                     /* Carousel */
-                    // case jsonType.slider:
-                    // return <Carousel key={index} data={ent.items} />;
+                    case jsonType.slider:
+                        return <Carousel key={index} data={ent.items} />;
 
                     /* Categories */
                     case jsonType.category:
