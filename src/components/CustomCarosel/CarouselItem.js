@@ -8,14 +8,10 @@ const { width, height } = Dimensions.get("window");
 const carouselHeight = height / 5;
 const CarouselItem = ({ item }) => {
     const navigation = useNavigation();
-    function onPress(id) {
-        navigation.navigate("ProductCategory", {
-            id: id,
-        });
-    }
+
     return (
         <View style={styles.cardView}>
-            <RippleButton onPress={() => onPress(2)}>
+            <RippleButton onPress={() => navigation("CategoryDetail", item)}>
                 <Image style={styles.image} source={{ uri: item.url }} />
             </RippleButton>
             <View style={styles.textView}>

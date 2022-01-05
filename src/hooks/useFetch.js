@@ -6,6 +6,9 @@ const useFetch = (url, options) => {
     const [response, setResponse] = useState([]);
     const [error, setError] = useState(null);
     const [status, setStatus] = useState("idle");
+
+    if (!url) return;
+
     useEffect(() => {
         const source = axios.CancelToken.source();
 

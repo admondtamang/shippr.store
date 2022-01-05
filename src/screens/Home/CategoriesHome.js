@@ -24,7 +24,7 @@ const data = [
         parent: 84,
         description: "",
         display: "default",
-        image: null,
+        image: "https://reactnative.dev/img/tiny_logo.png",
         menu_order: 0,
         count: 0,
         _links: {
@@ -289,15 +289,15 @@ const data = [
     },
 ];
 
-export default function CategoriesHome() {
+export default function CategoriesHome({ categories }) {
     const { error, isLoading, status, response } = useFetchQuery("home_categories", CATEGORIES);
-    // console.log(response);
+    console.log(response);
 
     return (
         <CustomFlatList
-            icon={<Feather name="watch" size={24} color="black" />}
+            icon={<Feather name="file" size={24} color="black" />}
             showViewAll
-            data={data}
+            data={categories}
             type={ItemList.category}
             title="Explore"
             numColumns={3}

@@ -161,12 +161,12 @@ export default function ProductDetail({ route, navigation }) {
                         </View>
 
                         {/* Color */}
-                        <ToggleButton.Row onValueChange={(value) => setValue(value)} value={value}>
+                        {/* <ToggleButton.Row onValueChange={(value) => setValue(value)} value={value}>
                             <Text style={tw`font-bold text-gray-600 text-lg w-full pt-2`}>Size</Text>
 
                             <ToggleButton icon="format-align-left" value="left" />
                             <ToggleButton icon="format-align-right" value="right" />
-                        </ToggleButton.Row>
+                        </ToggleButton.Row> */}
                     </View>
                 </Animated.ScrollView>
                 {/* Add to cart button */}

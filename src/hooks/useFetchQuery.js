@@ -9,15 +9,16 @@ import axiosInstance from "../utils/axios";
  * @param {*} options axios properities
  * @returns {resopnse, error,isLoading, status}
  */
-const useFetchQuery = (queryName, url, options) => {
+const useFetchQuery = (queryName, url, options, dependent) => {
     const { isLoading, error, data, status } = useQuery(queryName, () =>
         axiosInstance
             .get(url, { ...options })
             .then((res) => res.data)
             .catch((error) => console.log(error))
     );
-    console.log(url);
-    useEffect(() => {}, [url, status]);
+    useEffect(() => {
+        console.log(url, isLoading, status);
+    }, [url, data, status, dependent]);
 
     return {
         response: data,

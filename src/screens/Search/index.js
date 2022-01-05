@@ -11,6 +11,8 @@ import { PRODUCTS, STATUS } from "../../utils/constants";
 import useFetchQuery from "../../hooks/useFetchQuery";
 import Loading from "../../components/Loading";
 import { ScrollView } from "react-native-gesture-handler";
+import useFetch from "../../hooks/useFetch";
+import PaginatedFlatList from "../../components/PaginatedFlatList";
 
 export default function Search() {
     const [searchQuery, setSearchQuery] = React.useState("");
@@ -20,9 +22,17 @@ export default function Search() {
     const onPressTags = (query) => {
         setSearchQuery(query);
     };
-    let URL = PRODUCTS + "?per_page=4&orderby=popularity&search=" + searchQuery;
 
-    const { error, isLoading, status, response } = useFetchQuery("search", URL);
+    let URL = PRODUCTS + "?orderby=popularity&search=" + searchQuery;
+
+    const {
+        response,
+        error,
+        status: { isLoading, isRejected, isResolved },
+    } = useFetch(URL, {});
+
+    console.log("-----------", URL);
+    // useEffect(() => {}, [isLoading, searchQuery]);
 
     if (isLoading) {
         return <Loading />;
@@ -52,18 +62,30 @@ export default function Search() {
     return (
         <SafeContainer style={tw`mx-2 my-2`}>
             <Searchbar placeholder="Search products" onChangeText={onChangeSearch} value={searchQuery} />
+            <CustomFlatList
+                ListHeaderComponent={
+                    <>
+                        <Text style={tw`text-lg font-bold p-2`}>Suggestion</Text>
+                    </>
+                }
+                data={response}
+                type={ItemList.product}
+                showsHorizontalScrollIndicator={false}
+                style={tw`pb-32 pt-2`}
+                numColumns={2}
+            />
             <ScrollView>
-                {STATUS.success == status && (
+                {isResolved && (
                     <CustomFlatList
                         // icon={<Feather name="watch" size={24} color="black" />}
                         ListHeaderComponent={
                             <>
                                 <View style={tw`flex flex-row mb-3`}>
-                                    <Tag onPressTags={onPressTags} label="All" />
-                                    <Tag onPressTags={onPressTags} label="Jordan" />
+                                    <Tag onPressTags={onPressTags} label="book" />
+                                    <Tag onPressTags={onPressTags} label="men" />
                                     <Tag onPressTags={onPressTags} label="Medicine" />
                                 </View>
-                                <Carousel data={dummyData} noDot={true} />
+                                {/* <Carousel data={dummyData} noDot={true} /> */}
                                 <Text style={tw`text-lg font-bold p-2`}>Suggestion</Text>
                             </>
                         }

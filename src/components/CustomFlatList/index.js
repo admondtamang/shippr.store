@@ -52,7 +52,7 @@ export default function CustomFlatList({
             </View>
 
             {showViewAll && (
-                <RippleButton onPress={() => null}>
+                <RippleButton onPress={() => navigation.navigate("CategoryDetail", { id: showViewAll })}>
                     <Text style={tw`font-bold mr-3 p-2 rounded-lg bg-gray-200`}>More</Text>
                 </RippleButton>
             )}

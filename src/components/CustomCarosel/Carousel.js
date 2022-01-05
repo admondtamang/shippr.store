@@ -51,7 +51,7 @@ const Carousel = ({ data, noDot, ...rest }) => {
                     renderItem={({ item }) => {
                         return <CarouselItem item={item} />;
                     }}
-                    onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }])}
+                    onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], { useNativeDriver: false })}
                 />
                 {!noDot == undefined ||
                     (!noDot && (

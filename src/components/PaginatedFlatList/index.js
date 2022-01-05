@@ -6,14 +6,15 @@ import axiosInstance from "../../utils/axios";
 import CustomFlatList from "../CustomFlatList";
 import ItemList from "../CustomFlatList/ItemList";
 import { CATEGORIES, PRODUCTS } from "../../utils/constants";
+import Loading from "../Loading";
 
-export default function PaginatedFlatList({ slug }) {
+export default function PaginatedFlatList({ slug, searchUrl }) {
     const numColumns = 2;
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [response, setResponse] = useState([]);
-    const url = PRODUCTS + `?category=` + slug + `&page=` + page;
-    console.log(url);
+    const url = searchUrl || PRODUCTS + `?category=` + slug + `&page=` + page;
+    console.log("---", searchUrl, url);
     let oldSlug;
 
     useEffect(() => getData(), [page, slug]);
@@ -21,7 +22,6 @@ export default function PaginatedFlatList({ slug }) {
     const getData = () => {
         setLoading(true);
         oldSlug != slug && setResponse([]);
-        console.log(oldSlug, slug);
         axiosInstance(url)
             .then((res) => {
                 setResponse([...response, ...res.data]);
@@ -62,6 +62,9 @@ export default function PaginatedFlatList({ slug }) {
     const loadMoreData = () => {
         setPage((prev) => page + 1);
     };
+    if (loading) {
+        return <Loading />;
+    }
 
     const renderFooter = () => (
         <Button style={{ marginBottom: 5 }} icon="more" mode="text" onPress={loadMoreData} loading={loading}>

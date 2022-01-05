@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import RippleButton from "../../components/RippleButton";
 
